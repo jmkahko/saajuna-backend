@@ -4,10 +4,41 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
+// Tietokanta yhteys ja ENV tiedosto määrittely
+const mongoose = require('mongoose');
+require('dotenv').config(); //dotenv -moduuli tarvitaan jos aiotaan käyttää .env -filua
+
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const asematRouter = require('./routes/asemat');
 
 const app = express();
+
+// Tietokanta yhteyden muodostus
+mongoose.set('useUnifiedTopology', true); // määritys jota käytetään tietokantapalvelimen etsinnässä
+
+// MongoDB tietokantaan yhteyden muodostus paikalliseen tietokantaan
+mongoose
+  .connect(
+    'mongodb://' +
+      process.env.DB_USER +
+      ':' +
+      process.env.DB_PW +
+      '@localhost:27017/' +
+      process.env.DB_NAME,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useFindAndModify: false,
+      useCreateIndex: true,
+    }
+  )
+  .then(() => {
+    console.log('Database connection successful');
+  })
+  .catch((err) => {
+    console.error('Database connection error: ' + err);
+  });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -19,8 +50,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Reitien käyttöönotto
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/asemat', asematRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
