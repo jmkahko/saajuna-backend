@@ -17,15 +17,10 @@ const app = express();
 // Tietokanta yhteyden muodostus
 mongoose.set('useUnifiedTopology', true); // määritys jota käytetään tietokantapalvelimen etsinnässä
 
-// MongoDB tietokantaan yhteyden muodostus paikalliseen tietokantaan
+// mongoDB Atlas tietokantaan yhteyden muodostus
 mongoose
   .connect(
-    'mongodb://' +
-      process.env.DB_USER +
-      ':' +
-      process.env.DB_PW +
-      '@localhost:27017/' +
-      process.env.DB_NAME,
+    process.env.MONGODB_URL,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
