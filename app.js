@@ -19,9 +19,7 @@ mongoose.set('useUnifiedTopology', true); // määritys jota käytetään tietok
 
 // mongoDB Atlas tietokantaan yhteyden muodostus
 mongoose
-  .connect(
-    process.env.MONGODB_URL,
-    {
+  .connect(process.env.MONGODB_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useFindAndModify: false,
