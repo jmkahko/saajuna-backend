@@ -11,6 +11,7 @@ require('dotenv').config(); //dotenv -moduuli tarvitaan jos aiotaan käyttää .
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const asematRouter = require('./routes/asemat');
+const junatRouter = require('./routes/junat');
 
 const app = express();
 
@@ -47,6 +48,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/asemat', asematRouter);
+app.use('/junat', junatRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
