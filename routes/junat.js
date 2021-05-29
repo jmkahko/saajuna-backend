@@ -6,11 +6,7 @@ const JunaController = require('../controllers/junacontroller');
 router.get('/paikkatieto/:timestamp/:trainNumber/', JunaController.haePaikkatieto);
 
 // Haetaan tietynjunan aikataulu
-//router.get('/aikataulu/:timestamp/:trainNumber/', JunaController.haeAikataulu);
-
-
-
-
+router.get('/aikataulu/:timestamp/:trainNumber/', JunaController.haeAikataulu);
 
 module.exports = router;
 
