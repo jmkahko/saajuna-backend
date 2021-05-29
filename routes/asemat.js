@@ -19,4 +19,7 @@ router.get('/:id', AsemaController.haeIdlla);
 // Haetaan tietyn aseman stationShortCodella
 router.get('/shortcode/:stationShortCode', AsemaController.haeLyhytKoodilla);
 
+// Haetaan aseman aikataulu
+//router.get('/aikataulu/:timestamp/:trainNumber/', AsemaController.asemanAikataulu);
+
 module.exports = router;
