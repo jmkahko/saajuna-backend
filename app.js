@@ -12,6 +12,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const asematRouter = require('./routes/asemat');
 const junatRouter = require('./routes/junat');
+const saaasematRouter = require('./routes/saaasemat');
 
 const app = express();
 
@@ -21,12 +22,11 @@ mongoose.set('useUnifiedTopology', true); // määritys jota käytetään tietok
 // mongoDB Atlas tietokantaan yhteyden muodostus
 mongoose
   .connect(process.env.MONGODB_URL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useFindAndModify: false,
-      useCreateIndex: true,
-    }
-  )
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
+  })
   .then(() => {
     console.log('Database connection successful');
   })
@@ -49,6 +49,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/asemat', asematRouter);
 app.use('/junat', junatRouter);
+app.use('/saaasemat', saaasematRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
