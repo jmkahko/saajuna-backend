@@ -16,8 +16,8 @@ const SaanytSchema = new mongoose.Schema({
   p_sea: { type: Number }, // Paine
   vis: { type: Number }, // Näkyvyys
   n_man: { type: Number }, // Pilvisyys
-  longitude: { type: String, max: 9 }, // "25.006783"
-  latitude: { type: String, max: 9 }, // "64.537118"
+  wawa: { type: Number }, // wawa
+  fmisid: { type: Number }, // esim. Kajaani Petäisenniska 126736
 });
 
 // Tehdään skeemasta model, jonka metodeilla kantaoperaatioita suoritetaan. Model on luokka joka sisältää skeeman
