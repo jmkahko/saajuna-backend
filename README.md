@@ -3,6 +3,7 @@ Jyväskylän ammattikorkeakoulun Web-kehittäjä kurssin lopputyön Sää Juna b
 Projektin frontend https://github.com/jmkahko/saajuna-frontend
 
 # .env tiedostoon tarvittavia muuttujia
+
 ```
 # mongoDB Atlas tunnus
 MONGOD_URL="TÄHÄNSALAINENLINKKI"
