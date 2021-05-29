@@ -8,15 +8,12 @@ mongoose.set('useUnifiedTopology', true); // määritys jota käytetään tietok
 
 // yhteydenotto Docker-kontissa sijaitsevaan kantaan, kontin IP on XXX.XX.X.X: Voi myös toimi suoraan localhost komennolla
 mongoose
-  .connect(
-    'mongodb://' +
-      process.env.DB_USER +
-      ':' +
-      process.env.DB_PW +
-      '@localhost:27017/' +
-      process.env.DB_NAME,
-    { useNewUrlParser: true }
-  )
+  .connect(process.env.MONGODB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
+  })
   .then(() => {
     console.log('Database connection successful');
   })
