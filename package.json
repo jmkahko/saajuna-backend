@@ -13,9 +13,12 @@
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
+    "https": "^1.0.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.9",
     "morgan": "~1.9.1",
-    "request": "^2.88.2"
+    "parser": "^0.1.4",
+    "request": "^2.88.2",
+    "xml2js": "^0.4.23"
   }
 }
