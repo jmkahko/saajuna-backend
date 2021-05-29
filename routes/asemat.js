@@ -19,7 +19,7 @@ router.get('/:id', AsemaController.haeIdlla);
 // Haetaan tietyn aseman stationShortCodella
 router.get('/shortcode/:stationShortCode', AsemaController.haeLyhytKoodilla);
 
-// Haetaan aseman aikataulu
-//router.get('/aikataulu/:timestamp/:trainNumber/', AsemaController.asemanAikataulu);
+// Haetaan aseman aikataulu. Junat jotka pysähtyvät asemalla monelta ja monelta lähtevät esim. http://localhost:3000/asemat/aikataulu/KAJ/0/5/0/2
+router.get('/aikataulu/:station/:arrived_trains/:arriving_trains/:departed_trains/:departing_trains', AsemaController.haeAsemanAikataulu);
 
 module.exports = router;
