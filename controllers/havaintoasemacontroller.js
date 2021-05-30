@@ -31,14 +31,12 @@ const HavaintoAsemaController = {
   // Hae havaintoaseman säätieto. Päivittyy 10 minuutin välein
   haeHavaintoasemanSaa: (req, response) => {
     const fmisid = req.params.fmisid; // Saadaan päivätieto
+    const aika = '2021-05-30T08:10:00.000Z'; // Testiaika 
 
-    const aika = new Date().toISOString();
-    console.log(aika);
+    const x = 1;
 
-    const x = 2;
-
-    if (x === 2) {
-      Saanyt.findOne({ fmisid: req.params.fmisid }, (error, saatieto) => {
+    if (x === 1) {
+      Saanyt.findOne({ fmisid: req.params.fmisid },  (error, saatieto) => {
         // Jos tulee virhe niin lähetetään virhesanoma
         if (error) {
           throw error;
@@ -69,24 +67,53 @@ const HavaintoAsemaController = {
             // Tämä tulostaa datan mitä tulee kokonaan
             //console.log('data', data);
             parser.parseString(data, function (err, result) {
-              // console.log(result);
 
-              taulukko.push(
-                result['wfs:FeatureCollection']['wfs:member'][0][
-                  'BsWfs:BsWfsElement'
-                ][0]['BsWfs:Time']
-              );
+              // Lisätään kellonaika taulukkoon
+              taulukko.push([['time'].join(), result['wfs:FeatureCollection']['wfs:member'][0][
+                'BsWfs:BsWfsElement'
+              ][0]['BsWfs:Time'].join()]);
 
+              // Lisätään mittaus arvot taulukkoon
               for (let x = 0; x <= 12; x++) {
+                // Haetaan parametrin nimi
+                let parametrinimi =
+                result['wfs:FeatureCollection']['wfs:member'][x][
+                  'BsWfs:BsWfsElement'
+                ][0]['BsWfs:ParameterName'].join();
+
+                // Haetaan mittaus tulos
                 let parametritulos =
                   result['wfs:FeatureCollection']['wfs:member'][x][
                     'BsWfs:BsWfsElement'
-                  ][0]['BsWfs:ParameterValue'];
-                taulukko.push(parametritulos);
+                  ][0]['BsWfs:ParameterValue'].join();
+
+                // Muutetetaan saatu NaN tulos null arvoon, joka tallennetaan tietokantaan.
+                if (parametritulos === 'NaN') {
+                  taulukko.push([parametrinimi, null]);
+                } else {
+                  taulukko.push([parametrinimi, Number(parametritulos)]);
+                }
               }
 
-              taulukko.push(fmisid);
-              console.log(taulukko);
+              // Lisätään fmisid numero taulukkoon
+              taulukko.push(['fmisid', Number(fmisid)]);
+
+              // Muutetaan taulukko objectiksi
+              const arrayToObject = Object.fromEntries(new Map(taulukko));
+
+              // Tulostetaan saatu tulos
+              console.log(arrayToObject);
+
+              // Tallennetaan saatu tulos tietokantaan
+              //const newSaa = Saanyt(arrayToObject);
+
+              //newSaa.save(function (err) {
+              //  if (err) {
+              //    throw err;
+              //  }
+              //  console.log('Sää tallennettu.');
+              //});
+
             });
           });
         }
