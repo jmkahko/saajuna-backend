@@ -32,22 +32,47 @@ const HavaintoAsemaController = {
   haeHavaintoasemanSaa: (req, response) => {
     const fmisid = req.params.fmisid; // Saadaan päivätieto
 
-    // const date = new Date();
-    // let date1 = new Date(date).toISOString();
-    // console.log(date1);
+    // Haetaan päivämäärä ja kellonaika
+    let aika1 = new Date();
+    aika1.setSeconds(0, 0); // Määritellään ajasta sekunnit ja millisekunnit nolliksi
 
-    const aika1 = new Date();
-    const aika = Date.UTC(
-      aika1.getUTCFullYear(),
-      aika1.getUTCMonth(),
-      aika1.getUTCDate(),
-      aika1.getUTCHours(),
-      aika1.getUTCMinutes()
-    );
+    // Ajan muunnoksia (vuosi, kuukausi, päivä, tunti ja minuutti). Sekunnit ja millisekunnit jätetään pois.
+    // FMI käyttää päivämäärä-tiedossaan UTC-aikaa, joten esimerkiksi tunneista pitää vähentää 3, jotta saadaan
+    // haku tapahtumaan oikeana aikana.
+    let vuosi = aika1.getFullYear();
+    let kuukausi = aika1.getMonth() + 1;
+    let paiva = aika1.getDate();
+    let tunti = aika1.getHours() - 3;
+    let minuutti = aika1.getMinutes();
+    // Pyöristetään minuutit alaspäin tasakymmenminuuteiksi, koska tieto haetaan fmi:n tietokannasta esim. 13.10, 13.20, 13.30
+    minuutti = Math.floor(minuutti / 10) * 10;
 
-    console.log(new Date(aika));
+    // Lisätään kuukausiin, päiviin, tunteihin ja minuutteihin 0 eteen mikäli ne ovat pienempiä kuin 10.
+    // Tällöin saadaan päivämäärätiedot oikeiksi ja määrämuotoisiksi.
+    if (kuukausi < 10) {
+      kuukausi = '0' + kuukausi;
+    }
 
-    const x = 2;
+    if (paiva < 10) {
+      paiva = '0' + paiva;
+    }
+
+    if (tunti < 10) {
+      tunti = '0' + tunti;
+    }
+
+    if (minuutti < 10) {
+      minuutti = '0' + minuutti;
+    }
+
+    // Muodostetaan aika hakua varten määrämuotoisena
+    const aika =
+      vuosi + '-' + kuukausi + '-' + paiva + 'T' + tunti + ':' + minuutti;
+
+    console.log(aika1);
+    console.log(aika);
+
+    const x = 1;
 
     if (x === 2) {
       Saanyt.findOne({ fmisid: req.params.fmisid }, (error, saatieto) => {
@@ -81,24 +106,54 @@ const HavaintoAsemaController = {
             // Tämä tulostaa datan mitä tulee kokonaan
             //console.log('data', data);
             parser.parseString(data, function (err, result) {
-              // console.log(result);
-
-              taulukko.push(
+              // Lisätään kellonaika taulukkoon
+              taulukko.push([
+                ['time'].join(),
                 result['wfs:FeatureCollection']['wfs:member'][0][
                   'BsWfs:BsWfsElement'
-                ][0]['BsWfs:Time']
-              );
+                ][0]['BsWfs:Time'].join(),
+              ]);
 
+              // Lisätään mittaus arvot taulukkoon
               for (let x = 0; x <= 12; x++) {
+                // Haetaan parametrin nimi
+                let parametrinimi =
+                  result['wfs:FeatureCollection']['wfs:member'][x][
+                    'BsWfs:BsWfsElement'
+                  ][0]['BsWfs:ParameterName'].join();
+
+                // Haetaan mittaus tulos
                 let parametritulos =
                   result['wfs:FeatureCollection']['wfs:member'][x][
                     'BsWfs:BsWfsElement'
-                  ][0]['BsWfs:ParameterValue'];
-                taulukko.push(parametritulos);
+                  ][0]['BsWfs:ParameterValue'].join();
+
+                // Muutetetaan saatu NaN tulos null arvoon, joka tallennetaan tietokantaan.
+                if (parametritulos === 'NaN') {
+                  taulukko.push([parametrinimi, null]);
+                } else {
+                  taulukko.push([parametrinimi, Number(parametritulos)]);
+                }
               }
 
-              taulukko.push(fmisid);
-              console.log(taulukko);
+              // Lisätään fmisid numero taulukkoon
+              taulukko.push(['fmisid', Number(fmisid)]);
+
+              // Muutetaan taulukko objectiksi
+              const arrayToObject = Object.fromEntries(new Map(taulukko));
+
+              // Tulostetaan saatu tulos
+              console.log(arrayToObject);
+
+              // Tallennetaan saatu tulos tietokantaan
+              const newSaa = Saanyt(arrayToObject);
+
+              newSaa.save(function (err) {
+                if (err) {
+                  throw err;
+                }
+                console.log('Sää tallennettu.');
+              });
             });
           });
         }
