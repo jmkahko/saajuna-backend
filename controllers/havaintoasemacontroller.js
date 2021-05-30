@@ -3,7 +3,6 @@ const Saanyt = require('../models/Saanyt');
 const https = require('https'); // XML-parserointiin säätiedosta
 const xml2js = require('xml2js'); // XML-parserointiin säätiedosta
 const parser = new xml2js.Parser(); // XML-parserointiin säätiedosta
-const mongoose = require('mongoose'); // Tuodaan tietokanta haut
 
 // Asema modellin tuonti
 const HavaintoAsemaController = {
@@ -38,7 +37,7 @@ const HavaintoAsemaController = {
       // Jos tulee virhe niin lähetetään virhesanoma
       if (error) {
         throw error;
-      }
+      }    
       
       // Haetaan päivämäärä ja kellonaika
       let aika1 = new Date();
