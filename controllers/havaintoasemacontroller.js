@@ -80,7 +80,7 @@ const HavaintoAsemaController = {
           throw error;
         }
         response.json(saatieto); // Lähetetään JSONina tietokannasta saatu tieto eteenpäin
-      });
+      }).sort({'_id':-1});
     } else {
       // Viimeisimmästä säätiedon hausta on yli 10 minuuttia aikaa. Haetaan säätieto ja tallennetaan tietokantaan
       const url =
@@ -164,7 +164,7 @@ const HavaintoAsemaController = {
           throw error;
         }
         response.json(saatieto); // Lähetetään JSONina tietokannasta saatu tieto eteenpäin
-      });
+      }).sort({'_id':-1});
     }
   },
 };
