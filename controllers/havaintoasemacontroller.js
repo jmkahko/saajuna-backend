@@ -33,10 +33,50 @@ const HavaintoAsemaController = {
     const fmisid = req.params.fmisid; // Saadaan päivätieto
     const aika = '2021-05-30T08:10:00.000Z'; // Testiaika 
 
+    // Haetaan päivämäärä ja kellonaika
+    let aika1 = new Date();
+    aika1.setSeconds(0, 0); // Määritellään ajasta sekunnit ja millisekunnit nolliksi
+
+    // Ajan muunnoksia (vuosi, kuukausi, päivä, tunti ja minuutti). Sekunnit ja millisekunnit jätetään pois.
+    // FMI käyttää päivämäärä-tiedossaan UTC-aikaa, joten esimerkiksi tunneista pitää vähentää 3, jotta saadaan
+    // haku tapahtumaan oikeana aikana.
+    let vuosi = aika1.getFullYear();
+    let kuukausi = aika1.getMonth() + 1;
+    let paiva = aika1.getDate();
+    let tunti = aika1.getHours() - 3;
+    let minuutti = aika1.getMinutes();
+    // Pyöristetään minuutit alaspäin tasakymmenminuuteiksi, koska tieto haetaan fmi:n tietokannasta esim. 13.10, 13.20, 13.30
+    minuutti = Math.floor(minuutti / 10) * 10;
+
+    // Lisätään kuukausiin, päiviin, tunteihin ja minuutteihin 0 eteen mikäli ne ovat pienempiä kuin 10.
+    // Tällöin saadaan päivämäärätiedot oikeiksi ja määrämuotoisiksi.
+    if (kuukausi < 10) {
+      kuukausi = '0' + kuukausi;
+    }
+
+    if (paiva < 10) {
+      paiva = '0' + paiva;
+    }
+
+    if (tunti < 10) {
+      tunti = '0' + tunti;
+    }
+
+    if (minuutti < 10) {
+      minuutti = '0' + minuutti;
+    }
+
+    // Muodostetaan aika hakua varten määrämuotoisena
+    const aika =
+      vuosi + '-' + kuukausi + '-' + paiva + 'T' + tunti + ':' + minuutti;
+
+    console.log(aika1);
+    console.log(aika);
+
     const x = 1;
 
-    if (x === 1) {
-      Saanyt.findOne({ fmisid: req.params.fmisid },  (error, saatieto) => {
+    if (x === 2) {
+      Saanyt.findOne({ fmisid: req.params.fmisid }, (error, saatieto) => {
         // Jos tulee virhe niin lähetetään virhesanoma
         if (error) {
           throw error;
@@ -105,15 +145,15 @@ const HavaintoAsemaController = {
               console.log(arrayToObject);
 
               // Tallennetaan saatu tulos tietokantaan
-              //const newSaa = Saanyt(arrayToObject);
 
-              //newSaa.save(function (err) {
-              //  if (err) {
-              //    throw err;
-              //  }
-              //  console.log('Sää tallennettu.');
-              //});
+              const newSaa = Saanyt(arrayToObject);
 
+              newSaa.save(function (err) {
+                if (err) {
+                  throw err;
+                }
+                console.log('Sää tallennettu.');
+              });
             });
           });
         }

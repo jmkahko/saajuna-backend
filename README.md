@@ -11,3 +11,8 @@ MONGOD_URL="TÄHÄNSALAINENLINKKI"
 # verifonetoken JWT-token palvelimelta
 SECRET = "SALAINENSALASANA"
 ```
+
+Luotu modelit Asema.js, Havaintoasema.js, Saanyt.js ja User.js eri datoja varten.
+Luotu controllerit asemacontroller.js, havaintoasemacontroller.js, junacontroller.js ja usercontroller.js.
+Lisätty sääasemien haku Ilmatieteenlaitoksen avoimesta datasta.
+Tehty omat tiedosto manuaalista tiedon tallentamista varten
