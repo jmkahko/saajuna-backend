@@ -32,8 +32,20 @@ const HavaintoAsemaController = {
   haeHavaintoasemanSaa: (req, response) => {
     const fmisid = req.params.fmisid; // Saadaan päivätieto
 
-    const aika = new Date().toISOString();
-    console.log(aika);
+    // const date = new Date();
+    // let date1 = new Date(date).toISOString();
+    // console.log(date1);
+
+    const aika1 = new Date();
+    const aika = Date.UTC(
+      aika1.getUTCFullYear(),
+      aika1.getUTCMonth(),
+      aika1.getUTCDate(),
+      aika1.getUTCHours(),
+      aika1.getUTCMinutes()
+    );
+
+    console.log(new Date(aika));
 
     const x = 2;
 
