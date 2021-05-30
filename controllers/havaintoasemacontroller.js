@@ -31,7 +31,6 @@ const HavaintoAsemaController = {
   // Hae havaintoaseman säätieto. Päivittyy 10 minuutin välein
   haeHavaintoasemanSaa: (req, response) => {
     const fmisid = req.params.fmisid; // Saadaan päivätieto
-    const aika = '2021-05-30T08:10:00.000Z'; // Testiaika 
 
     // Haetaan päivämäärä ja kellonaika
     let aika1 = new Date();
@@ -67,8 +66,7 @@ const HavaintoAsemaController = {
     }
 
     // Muodostetaan aika hakua varten määrämuotoisena
-    const aika =
-      vuosi + '-' + kuukausi + '-' + paiva + 'T' + tunti + ':' + minuutti;
+    const aika = vuosi + '-' + kuukausi + '-' + paiva + 'T' + tunti + ':' + minuutti;
 
     console.log(aika1);
     console.log(aika);
