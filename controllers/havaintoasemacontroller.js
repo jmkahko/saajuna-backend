@@ -168,14 +168,20 @@ const HavaintoAsemaController = {
                   console.log('Tietojen haku epäonnistui')
                   console.error(e.message);
                 } finally {
-                  // Lähetetään viimeisin mittaustulos
-                  Saanyt.findOne({ fmisid: req.params.fmisid }, (error, saatieto) => {
-                    // Jos tulee virhe niin lähetetään virhesanoma
-                    if (error) {
-                      throw error;
-                    }
-                    response.json(saatieto); // Lähetetään JSONina tietokannasta saatu tieto eteenpäin
-                  }).sort({'_id':-1});
+
+                  // Lisätään tiedon hakuun viive tallennuksen jälkeen, muuten tuloksena tulee vanha tallennus eikä nyt haettu tieto
+                  setTimeout(tallennuksenhaku, 1000);
+
+                  function tallennuksenhaku() {
+                    // Lähetetään viimeisin mittaustulos
+                    Saanyt.findOne({ fmisid: req.params.fmisid }, (error, saatieto) => {
+                      // Jos tulee virhe niin lähetetään virhesanoma
+                      if (error) {
+                        throw error;
+                      }
+                      response.json(saatieto); // Lähetetään JSONina tietokannasta saatu tieto eteenpäin
+                    }).sort({'_id':-1});
+                  }
                 }
               });
             });
