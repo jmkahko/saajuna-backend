@@ -8,6 +8,7 @@ const logger = require('morgan');
 const mongoose = require('mongoose');
 require('dotenv').config(); //dotenv -moduuli tarvitaan jos aiotaan käyttää .env -filua
 
+// Reitit
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const asematRouter = require('./routes/asemat');
