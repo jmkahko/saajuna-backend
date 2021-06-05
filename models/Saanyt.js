@@ -1,7 +1,7 @@
 // Mongoose-skema, josta tehdään model joka exportataan
 const mongoose = require('mongoose');
 
-// Skeeman luonti. Skeema määrittää kannassa olevan tiedon muodon
+// Nykyisen säätilan skeeman luonti. Skeema määrittää kannassa olevan tiedon muodon
 const SaanytSchema = new mongoose.Schema({
   time: { type: String }, // Kellonaika
   t2m: { type: Number }, // Lämpötila
