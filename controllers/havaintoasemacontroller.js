@@ -257,7 +257,7 @@ const HavaintoAsemaController = {
         console.log(erotustunnit);
         console.log(erotus);
 
-        if (erotustunnit === 180) {
+        if (erotustunnit === 3) {
           Saaennuste.findOne(
             { place: req.params.place },
             (error, saaennuste) => {
@@ -299,11 +299,6 @@ const HavaintoAsemaController = {
                   try {
                     // Lisätään kellonaika taulukkoon
 
-                    console.log(
-                      result['wfs:FeatureCollection']['wfs:member'][0][
-                        'BsWfs:BsWfsElement'
-                      ][0]['BsWfs:ParameterName']
-                    );
                     taulukko.push([
                       'time',
                       result['wfs:FeatureCollection']['wfs:member'][0][
@@ -333,7 +328,7 @@ const HavaintoAsemaController = {
                       }
                     }
 
-                    // Lisätään fmisid numero taulukkoon
+                    // Lisätään paikkakunta taulukkoon
                     taulukko.push(['place', place]);
 
                     // Muutetaan taulukko objectiksi
