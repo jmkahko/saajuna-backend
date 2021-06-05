@@ -1,0 +1,209 @@
+﻿name,fmisid,lpnn,wmo,latitude,longitude,altitude,group,start
+Alajärvi Möksy,101533,3314,2787,63.09,24.26,171,sää,1957
+Asikkala Pulkkilanharju,101185,1434,2727,61.27,25.52,79,sää,1991
+Enontekiö Kilpisjärvi Saana,102017,9004,2701,69.04,20.85,1002,sää,1991
+Enontekiö Kilpisjärvi kyläkeskus,102016,9003,2801,69.05,20.79,480,sää,1951
+Enontekiö Näkkälä,102019,9201,2726,68.6,23.58,374,sää,1960
+Enontekiö lentoasema,101976,8208,2802,68.36,23.43,308,sää,1999
+Espoo Nuuksio,852678,344,2986,60.29,24.57,90,sää,2014
+Espoo Tapiola,874863,342,2985,60.18,24.79,6,sää,2013
+Haapavesi Mustikkamäki,101695,4402,2797,64.14,25.42,112,sää,1951
+Hailuoto Keskikylä,101776,5301,2874,65.02,24.73,6,sää,1950
+Hailuoto Marjaniemi,101784,5310,2873,65.04,24.56,7,sää,1881
+Halsua Purola,101528,3309,2725,63.45,24.44,153,sää,1958
+Hammarland Märket,100919,14,2993,60.3,19.13,null,sää,1885
+Hanko Russarö,100932,101,2982,59.77,22.95,6,sää,1881
+Hanko Tulliniemi,100946,115,2746,59.81,22.91,10,sää,1990
+Hanko Tvärminne,100953,202,2750,59.84,23.25,3,sää,1962
+Hattula Lepaa,101151,1323,2704,61.11,24.32,87,sää,1927
+Heinola Asemantaus,101196,1506,2768,61.2,26.05,93,sää,1908
+Helsinki Harmaja,100996,330,2795,60.11,24.98,6,sää,1989
+Helsinki Helsingin majakka,101003,337,2989,59.95,24.93,0,sää,2003
+Helsinki Kaisaniemi,100971,304,2978,60.18,24.94,3,sää,1844
+Helsinki Kumpula,101004,339,2998,60.2,24.96,24,sää,2005
+Helsinki Malmi lentokenttä,101009,401,null,60.25,25.05,15,sää,1937
+Helsinki Vuosaari Käärmeniementie,103943,null,null,60.22,25.17,9,sää,2016
+Helsinki Vuosaari satama,151028,411,null,60.21,25.2,2,sää,2012
+Hyvinkää Hyvinkäänkylä,101130,1302,2829,60.6,24.8,86,sää,1930
+Hämeenlinna Katinen,101150,1322,2754,61,24.49,87,sää,2001
+Hämeenlinna Lammi Pappila,101154,1403,2767,61.05,25.04,125,sää,1963
+Ilmajoki Seinäjoki lentoasema,137188,null,null,62.69,22.84,86,sää,2012
+Ilomantsi Mekrijärvi,101651,3919,2939,62.77,30.98,155,sää,1999
+Ilomantsi Pötsönvaara,101649,3917,2766,63.14,31.04,233,sää,1997
+Inari Angeli Lintupuoliselkä,102026,9405,2857,68.9,25.74,285,sää,2008
+Inari Ivalo lentoasema,102033,9601,2807,68.61,27.42,140,sää,1957
+Inari Kaamanen,102047,9616,2702,69.14,27.27,156,sää,2008
+Inari Kirakkajärvi,102055,9708,2858,69.58,28.89,106,sää,2009
+Inari Nellim,102052,9705,2835,68.85,28.3,121,sää,1951
+Inari Raja-Jooseppi,102009,8704,2818,68.48,28.3,253,sää,1992
+Inari Saariselkä Kaunispää,102006,8607,2817,68.43,27.44,437,sää,1995
+Inari Saariselkä matkailukeskus,102005,8606,2722,68.42,27.41,302,sää,1976
+Inari Seitalaassa,129963,9617,2888,69.05,27.76,120,sää,2011
+Inari Väylä,102042,9611,2827,69.07,27.49,123,sää,1990
+Inkoo Bågaskär,100969,302,2984,59.93,24.01,13,sää,1954
+Joensuu Linnunlahti,101632,3825,2928,62.6,29.72,81,sää,2008
+Jokioinen Ilmala,101104,1201,2963,60.81,23.5,104,sää,1928
+Jomala Jomalaby,100917,11,2741,60.18,19.99,11,sää,1971
+Jomala Maarianhamina lentoasema,100907,1,2970,60.13,19.9,2,sää,1950
+Joutsa Savenaho,101367,2501,2771,61.88,26.09,145,sää,1946
+Juuka Niemelä,101609,3802,2791,63.23,29.23,115,sää,1914
+Juupajoki Hyytiälä,101317,2303,2770,61.85,24.29,154,sää,1956
+Juva Partala,101418,2622,2736,61.89,27.89,110,sää,1992
+Jyväskylä lentoasema,101339,2401,2935,62.4,25.67,139,sää,1945
+Jyväskylä lentoasema AWOS,137208,null,null,62.39,25.69,124,sää,1999
+Jämsä Halli Lentoasemantie,101338,2324,2946,61.86,24.81,144,sää,1964
+Jämsä Halli lentoasema,101315,2301,2945,61.86,24.8,144,sää,1964
+Järvenpää Sorto,103786,null,null,60.48,25.08,51,sää,2015
+Kaarina Yltöinen,100934,103,2828,60.39,22.55,6,sää,1927
+Kajaani Petäisenniska,126736,4620,2883,64.22,27.75,160,sää,2010
+Kajaani lentoasema,101725,4601,2897,64.28,27.67,132,sää,1956
+Kalajoki Ulkokalla,101673,4212,2907,64.33,23.45,null,sää,1876
+Kankaanpää Niinisalo lentokenttä,101291,2123,2753,61.84,22.46,null,sää,1940
+Karvia Alkkia,101272,2103,2708,62.18,22.8,162,sää,1966
+Kaskinen Sälgrund,101256,2002,2931,62.33,21.19,5,sää,1876
+Kauhajoki Kuja-Kokko,101289,2121,2769,62.41,22.18,93,sää,1986
+Kauhava lentokenttä,101503,3201,2913,63.12,23.04,42,sää,1931
+Kemi Ajos,101846,6307,2862,65.67,24.52,2,sää,1973
+Kemi I majakka,101783,5309,2863,65.39,24.1,0,sää,1978
+Kemi Kemi-Tornio lentoasema,101840,6301,2864,65.79,24.58,11,sää,1945
+Kemijärvi lentokenttä,101950,7607,2814,66.72,27.16,208,sää,2006
+Kemiönsaari Kemiö,100951,120,2906,60.17,22.76,12,sää,2009
+Kemiönsaari Vänö,100945,114,2743,59.87,22.19,10,sää,1990
+Kirkkonummi Mäkiluoto,100997,331,2794,59.92,24.35,2,sää,1989
+Kittilä Kenttärova,101987,8312,2824,67.99,24.24,347,sää,2002
+Kittilä Lompolonvuoma,778135,8303,2764,68,24.21,270,sää,2013
+Kittilä Matorova,101985,8310,2882,68,24.24,340,sää,1995
+Kittilä Pokka,101994,8404,2717,68.17,25.78,276,sää,1971
+Kittilä kirkonkylä,101990,8315,2860,67.65,24.9,181,sää,2009
+Kittilä lentoasema,101986,8311,2720,67.69,24.86,195,sää,1999
+Kokemäki Tulkkila,101103,1140,2937,61.25,22.35,38,sää,1931
+Kokkola Santahaka,101675,4214,2852,63.84,23.1,5,sää,2007
+Kokkola Tankar,101661,4109,2721,63.95,22.85,5,sää,1889
+Korsnäs Bredskäret,101479,3018,2780,62.93,21.19,1,sää,1991
+Kotka Haapasaari,101042,601,2967,60.29,27.18,4,sää,1986
+Kotka Rankki,101030,501,2976,60.38,26.96,11,sää,1933
+Kouvola Anjala,101194,1504,2830,60.7,26.81,31,sää,1941
+Kouvola Utti Lentoportintie,101219,1529,2956,60.89,26.93,99,sää,1944
+Kouvola Utti lentoasema,101191,1501,2966,60.9,26.95,102,sää,1944
+Kristiinankaupunki Majakka,101268,2014,2752,62.2,21.17,0,sää,1997
+Kruunupyy Kokkola-Pietarsaari lentoasema,101662,4201,2903,63.73,23.14,25,sää,1960
+Kuhmo Kalliojoki,101773,4901,2799,64.3,30.17,196,sää,1997
+Kumlinge kirkonkylä,100928,23,2790,60.26,20.75,23,sää,2000
+Kuopio Maaninka,101572,3603,2788,63.14,27.31,91,sää,1930
+Kuopio Ritoniemi,101580,3611,2732,62.8,27.9,86,sää,1980
+Kuopio Savilahti,101586,3617,2955,62.89,27.63,87,sää,2005
+Kustavi Isokari,101059,1016,2964,60.72,21.03,5,sää,1974
+Kuusamo Juuma,101899,6814,2749,66.32,29.4,298,sää,1989
+Kuusamo Kiutaköngäs,101887,6802,2811,66.37,29.31,164,sää,1966
+Kuusamo Ruka Talvijärvi,806428,6817,2760,66.17,29.14,306,sää,2013
+Kuusamo Rukatunturi,101897,6812,2868,66.17,29.15,500,sää,1990
+Kuusamo Välikangas,107081,null,null,66,29.22,266,sää,2019
+Kuusamo lentoasema,101886,6801,2869,65.99,29.23,265,sää,1908
+Kökar Bogskär,100921,16,2979,59.5,20.35,4,sää,1982
+Lahti Sopenkorpi,104796,1441,null,60.97,25.62,100,sää,2016
+Lappeenranta Hiekkapakka,101252,1716,2919,61.2,28.47,77,sää,2009
+Lappeenranta Konnunsuo,101246,1710,2733,61.04,28.56,46,sää,1991
+Lappeenranta Lepola,101247,1711,2959,61.06,28.21,103,sää,1995
+Lappeenranta lentoasema,101237,1701,2958,61.04,28.13,104,sää,1950
+Lemland Nyhamn,100909,3,2980,59.96,19.95,9,sää,1958
+Lieksa Lampela,101636,3904,2796,63.32,30.05,98,sää,1946
+Liperi Joensuu lentoasema,101608,3801,2929,62.66,29.64,112,sää,1955
+Liperi Tuiskavanluoto,101628,3821,2793,62.55,29.67,78,sää,1997
+Lohja Porla,100974,307,2706,60.24,24.05,36,sää,1949
+Loviisa Orrengrund,101039,510,2992,60.27,26.45,1,sää,1974
+Luhanka Judinsalo,101362,2426,2765,61.7,25.51,80,sää,1990
+Lumparland Långnäs satama,151048,12,2724,60.12,20.3,10,sää,2012
+Maalahti Strömmingsbådan,101481,3020,2781,62.98,20.74,2,sää,1997
+Maarianhamina Länsisatama,151029,26,2997,60.09,19.93,2,sää,2012
+Mikkeli Lentoasema AWOS,855522,null,null,61.69,27.21,101,sää,1959
+Mikkeli lentoasema,101398,2602,2947,61.69,27.2,99,sää,1951
+Multia Karhila,101536,3317,2927,62.51,24.81,227,sää,2008
+Muonio Laukukero,101982,8307,2820,68.06,24.03,760,sää,1996
+Muonio Sammaltunturi,101983,8308,2821,67.97,24.12,555,sää,1991
+Muonio kirkonkylä,106435,8211,2823,67.96,23.68,236,sää,2013
+Mustasaari Valassaaret,101464,3003,2910,63.44,21.07,4,sää,1895
+Mäntsälä Hirvihaara,103794,1440,2774,60.63,25.19,83,sää,2015
+Nurmes Valtimo,101743,4701,2798,63.67,28.83,114,sää,1969
+Nurmijärvi Röykkä,101149,1321,2983,60.51,24.65,110,sää,1952
+Oulu Oulunsalo Pellonpää,101799,5414,2851,64.94,25.37,11,sää,2007
+Oulu Vihreäsaari satama,101794,5409,2876,65.01,25.39,3,sää,1996
+Oulu lentoasema,101786,5401,2875,64.94,25.34,13,sää,1953
+Parainen Fagerholm,100924,19,2950,60.11,21.7,3,sää,1989
+Parainen Utö,100908,2,2981,59.78,21.37,6,sää,1881
+Parikkala Koitsanlahti,101254,1802,2734,61.44,29.46,74,sää,1991
+Pelkosenniemi Pyhätunturi,101958,7708,2705,67.02,27.22,491,sää,1995
+Pello kirkonkylä,101914,7307,2844,66.77,23.96,85,sää,1970
+Pietarsaari Kallan,101660,4108,2920,63.75,22.52,2,sää,1995
+Pirkkala Tampere-Pirkkala lentoasema,101118,1215,2944,61.42,23.62,112,sää,1979
+Pori Tahkoluoto satama,101267,2013,2751,61.63,21.38,3,sää,1996
+Pori lentoasema,101044,1001,2952,61.46,21.81,11,sää,1945
+Pori rautatieasema,101064,1021,2926,61.48,21.78,9,sää,2008
+Porvoo Emäsalo,101023,417,2991,60.2,25.63,19,sää,1974
+Porvoo Harabacka,101028,422,2759,60.39,25.61,22,sää,2006
+Porvoo Kalbådagrund,101022,416,2987,59.99,25.6,0,sää,1977
+Porvoo Kilpilahti satama,100683,424,2994,60.3,25.55,2,sää,2014
+Pudasjärvi lentokenttä,101805,5507,2866,65.4,26.96,120,sää,1999
+Puolanka Paljakka,101831,5716,2859,64.66,28.06,341,sää,2009
+Puumala kirkonkylä,150168,2708,2718,61.52,28.18,98,sää,2012
+Pyhtää lentokenttä,107029,513,null,60.49,26.59,21,sää,2019
+Pyhäjärvi Ojakylä,101705,4412,2738,63.74,25.71,152,sää,1990
+Raahe Lapaluoto satama,101785,5311,2872,64.67,24.41,2,sää,1990
+Raahe Nahkiainen,101775,5201,2800,64.61,23.9,0,sää,1997
+Raasepori Jussarö,100965,215,2757,59.82,23.57,17,sää,1990
+Rantasalmi Rukkasluoto,101436,2716,2772,62.06,28.57,79,sää,1997
+Ranua lentokenttä,101873,6514,2881,65.98,26.37,161,sää,2008
+Rauma Kylmäpihlaja,101061,1018,2761,61.14,21.3,4,sää,1990
+Rauma Pyynpää,105427,1023,null,61.14,21.52,15,sää,2018
+Rautavaara Ylä-Luosta,101603,3716,2789,63.38,28.66,164,sää,1976
+Rovaniemi Apukka,101933,7502,2813,66.58,26.01,106,sää,1939
+Rovaniemi lentoasema,101920,7401,2845,66.56,25.84,189,sää,1951
+Rovaniemi lentoasema AWOS,137190,null,null,66.57,25.85,187,sää,1999
+Rovaniemi rautatieasema,101928,7409,2847,66.5,25.71,85,sää,1997
+Salla Naruska,101966,7804,2745,67.16,29.18,213,sää,1999
+Salla Värriötunturi,102012,8803,2819,67.75,29.61,360,sää,1971
+Salla kirkonkylä,101959,7709,2849,66.82,28.69,218,sää,1960
+Salo Kiikala lentokenttä,100967,217,2777,60.46,23.65,117,sää,2002
+Salo Kärkkä,100955,205,2756,60.37,23.11,2,sää,1936
+Savonlinna Punkaharju Laukansaari,101441,2801,2778,61.8,29.32,79,sää,1904
+Savonlinna lentoasema,101430,2710,2948,61.95,28.93,92,sää,1974
+Savukoski kirkonkylä,101952,7702,2815,67.29,28.18,180,sää,1963
+Seinäjoki Pelmaa,101486,3101,2833,62.94,22.49,26,sää,1927
+Siikajoki Ruukki,101787,5402,2803,64.68,25.09,48,sää,1911
+Siilinjärvi Kuopio lentoasema,101570,3601,2917,63,27.81,94,sää,1945
+Sipoo Eestiluoto,101029,423,2930,60.12,25.22,13,sää,2008
+Sipoo Itätoukki,105392,425,null,60.1,25.19,5,sää,2017
+Sodankylä Lokka,102000,8601,2719,67.82,27.75,240,sää,1958
+Sodankylä Tähtelä,101932,7501,2836,67.37,26.63,179,sää,1891
+Sodankylä Vuotso,102001,8602,2816,68.08,27.19,247,sää,1958
+Somero Salkola,101128,1227,2949,60.65,23.81,142,sää,2010
+Sotkamo Kuolaniemi,101756,4714,2739,64.11,28.34,161,sää,1989
+Sotkamo Tuhkakylä,107113,null,null,64,28.06,212,sää,2019
+Suomussalmi Pesiö,101826,5711,2889,64.93,28.75,222,sää,1981
+Taivalkoski kirkonkylä,101885,6707,2804,65.57,28.22,197,sää,2002
+Tampere Härmälä,101124,1222,2763,61.47,23.75,85,sää,1948
+Tampere Siilinkari,101311,2219,2943,61.52,23.75,96,sää,1989
+Tampere Tampella,151049,2223,2744,61.5,23.76,91,sää,2012
+Tervola Loue,107201,6313,null,66.15,24.99,38,sää,2020
+Tohmajärvi Kemie,101459,2902,2832,62.24,30.35,91,sää,1925
+Toholampi Laitala,101689,4314,2737,63.82,24.16,84,sää,1988
+Tornio Torppi,101851,6312,2880,65.85,24.17,8,sää,2008
+Turku Artukainen,100949,118,2773,60.45,22.18,8,sää,2003
+Turku Rajakari,100947,116,2747,60.38,22.1,3,sää,1991
+Turku lentoasema,101065,1101,2972,60.52,22.28,45,sää,1955
+Utsjoki Kevo,102035,9603,2805,69.76,27.01,107,sää,1961
+Utsjoki Kevo Kevojärvi,126737,9618,2890,69.76,27.01,76,sää,2010
+Utsjoki Nuorgam,102036,9604,2825,70.08,27.9,22,sää,1929
+Vaala Pelso,101800,5502,2714,64.5,26.42,113,sää,1943
+Vaasa Klemettilä,101485,3024,2957,63.1,21.64,7,sää,2010
+Vaasa lentoasema,101462,3001,2911,63.06,21.75,4,sää,1946
+Vantaa Helsinki-Vantaan lentoasema,100968,301,2974,60.33,24.96,51,sää,1952
+Varkaus Kosulanniemi,101421,2625,2850,62.32,27.91,83,sää,2007
+Vesanto kirkonkylä,101555,3502,2710,62.92,26.42,121,sää,1914
+Vieremä Kaarakkala,101726,4602,2834,63.84,27.22,206,sää,1937
+Vihti Maasoja,100976,309,2758,60.42,24.4,39,sää,1938
+Viitasaari Haapaniemi,101537,3401,2915,63.08,25.86,130,sää,1969
+Virolahti Koivuniemi,101231,1612,2831,60.53,27.67,5,sää,1976
+Virrat Äijänneva,101310,2218,2735,62.33,23.54,138,sää,1986
+Ylitornio Meltosjärvi,101908,7301,2812,66.53,24.65,93,sää,1937
+Ylivieska lentokenttä,101690,4315,2755,64.05,24.72,76,sää,2000
+Ähtäri Inha,101520,3301,2924,62.55,24.14,161,sää,1912
