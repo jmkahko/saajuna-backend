@@ -222,7 +222,7 @@ const HavaintoAsemaController = {
     let vuosi = aika1.getFullYear();
     let kuukausi = aika1.getMonth() + 1;
     let paiva = aika1.getDate();
-    let tunti = aika1.getHours() - 3;
+    let tunti = aika1.getHours();
 
     // Lisätään kuukausiin, päiviin, tunteihin ja minuutteihin 0 eteen mikäli ne ovat pienempiä kuin 10.
     // Tällöin saadaan päivämäärätiedot oikeiksi ja määrämuotoisiksi hakua varten.
