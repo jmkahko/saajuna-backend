@@ -3,7 +3,6 @@ const Saanyt = require('../models/Saanyt');
 const https = require('https'); // XML-parserointiin säätiedosta
 const xml2js = require('xml2js'); // XML-parserointiin säätiedosta
 const parser = new xml2js.Parser(); // XML-parserointiin säätiedosta
-const mongoose = require('mongoose'); // Tuodaan tietokanta haut
 
 // Asema modellin tuonti
 const HavaintoAsemaController = {
@@ -38,7 +37,7 @@ const HavaintoAsemaController = {
       // Jos tulee virhe niin lähetetään virhesanoma
       if (error) {
         throw error;
-      }
+      }    
       
       // Haetaan päivämäärä ja kellonaika
       let aika1 = new Date();
@@ -79,6 +78,7 @@ const HavaintoAsemaController = {
       let erotus = new Date(kellonaika.time).getTime() - new Date(aika).getTime(); // This will give difference in milliseconds
       let erotusminuuttia = erotus / 60000;
   
+      // Tulostetaan kuluva aika, tietokannanttan tallennettu viimeisin, paljon erotus ajoissa
       console.log(aika1);
       console.log(kellonaika.time);
       console.log(erotusminuuttia);
@@ -113,68 +113,80 @@ const HavaintoAsemaController = {
               data += data_.toString();
             });
             res.on('end', function () {
-              // Tämä tulostaa datan mitä tulee kokonaan
-              //console.log('data', data);
+
+              // Parseroidaan saatu tulos result muuttujaan
               parser.parseString(data, function (err, result) {
 
-                // Lisätään kellonaika taulukkoon
-                taulukko.push([['time'].join(), result['wfs:FeatureCollection']['wfs:member'][0][
-                  'BsWfs:BsWfsElement'
-                ][0]['BsWfs:Time'].join()]);
-
-                // Lisätään mittaus arvot taulukkoon
-                for (let x = 0; x <= 12; x++) {
-                  // Haetaan parametrin nimi
-                  let parametrinimi =
-                  result['wfs:FeatureCollection']['wfs:member'][x][
+                // Tehdään try catch menettelyllä tietojen tallennus. Jos XML on tyhjä, niin ohjelman suoritus ei lakkaa kokonaan.
+                try {
+                  // Lisätään kellonaika taulukkoon
+                  taulukko.push(['time', result['wfs:FeatureCollection']['wfs:member'][0][
                     'BsWfs:BsWfsElement'
-                  ][0]['BsWfs:ParameterName'].join();
+                  ][0]['BsWfs:Time'].join()]);
 
-                  // Haetaan mittaus tulos
-                  let parametritulos =
+                  // Lisätään mittaus arvot taulukkoon
+                  for (let x = 0; x <= 12; x++) {
+                    // Haetaan parametrin nimi
+                    let parametrinimi =
                     result['wfs:FeatureCollection']['wfs:member'][x][
                       'BsWfs:BsWfsElement'
-                    ][0]['BsWfs:ParameterValue'].join();
+                    ][0]['BsWfs:ParameterName'].join();
 
-                  // Muutetetaan saatu NaN tulos null arvoon, joka tallennetaan tietokantaan.
-                  if (parametritulos === 'NaN') {
-                    taulukko.push([parametrinimi, null]);
-                  } else {
-                    taulukko.push([parametrinimi, Number(parametritulos)]);
+                    // Haetaan mittaus tulos
+                    let parametritulos =
+                      result['wfs:FeatureCollection']['wfs:member'][x][
+                        'BsWfs:BsWfsElement'
+                      ][0]['BsWfs:ParameterValue'].join();
+
+                    // Muutetetaan saatu NaN tulos null arvoon, joka tallennetaan tietokantaan.
+                    if (parametritulos === 'NaN') {
+                      taulukko.push([parametrinimi, null]);
+                    } else {
+                      taulukko.push([parametrinimi, Number(parametritulos)]);
+                    }
+                  }
+
+                  // Lisätään fmisid numero taulukkoon
+                  taulukko.push(['fmisid', Number(fmisid)]);
+
+                  // Muutetaan taulukko objectiksi
+                  const arrayToObject = Object.fromEntries(new Map(taulukko));
+
+                  // Tulostetaan saatu tulos
+                  console.log(arrayToObject);
+
+                  // Tallennetaan saatu tulos tietokantaan
+                  const newSaa = Saanyt(arrayToObject);
+
+                  newSaa.save(function (err) {
+                    if (err) {
+                      throw err;
+                    }
+                    console.log('Sää tallennettu.');
+                  });
+                } catch (e) {
+                  console.log('Tietojen haku epäonnistui')
+                  console.error(e.message);
+                } finally {
+
+                  // Lisätään tiedon hakuun viive tallennuksen jälkeen, muuten tuloksena tulee vanha tallennus eikä nyt haettu tieto
+                  setTimeout(tallennuksenhaku, 1000);
+
+                  function tallennuksenhaku() {
+                    // Lähetetään viimeisin mittaustulos
+                    Saanyt.findOne({ fmisid: req.params.fmisid }, (error, saatieto) => {
+                      // Jos tulee virhe niin lähetetään virhesanoma
+                      if (error) {
+                        throw error;
+                      }
+                      response.json(saatieto); // Lähetetään JSONina tietokannasta saatu tieto eteenpäin
+                    }).sort({'_id':-1});
                   }
                 }
-
-                // Lisätään fmisid numero taulukkoon
-                taulukko.push(['fmisid', Number(fmisid)]);
-
-                // Muutetaan taulukko objectiksi
-                const arrayToObject = Object.fromEntries(new Map(taulukko));
-
-                // Tulostetaan saatu tulos
-                console.log(arrayToObject);
-
-                // Tallennetaan saatu tulos tietokantaan
-                const newSaa = Saanyt(arrayToObject);
-
-                newSaa.save(function (err) {
-                  if (err) {
-                    throw err;
-                  }
-                  console.log('Sää tallennettu.');
-                });
               });
             });
           }
         });
-
-        // Haetaan tiedot tallennuksen jälkeen
-        Saanyt.findOne({ fmisid: req.params.fmisid }, (error, saatieto) => {
-          // Jos tulee virhe niin lähetetään virhesanoma
-          if (error) {
-            throw error;
-          }
-          response.json(saatieto); // Lähetetään JSONina tietokannasta saatu tieto eteenpäin
-        }).sort({'_id':-1});
       }
     }).sort({'_id':-1});
   },
