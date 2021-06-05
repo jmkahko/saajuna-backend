@@ -56,7 +56,7 @@ const HavaintoAsemaController = {
         let vuosi = aika1.getFullYear();
         let kuukausi = aika1.getMonth() + 1;
         let paiva = aika1.getDate();
-        let tunti = aika1.getHours() - 3;
+        let tunti = aika1.getHours();
         let minuutti = aika1.getMinutes();
         // Pyöristetään minuutit alaspäin tasakymmenminuuteiksi, koska tieto haetaan fmi:n tietokannasta esim. 13.10, 13.20, 13.30
         minuutti = Math.floor(minuutti / 10) * 10;
@@ -83,7 +83,10 @@ const HavaintoAsemaController = {
         const aika =
           vuosi + '-' + kuukausi + '-' + paiva + 'T' + tunti + ':' + minuutti;
 
-          console.log('Tunti Herokuussa ', tunti);
+          console.log('Aika ennen muutosta ' + aika);
+
+          
+          console.log('Aika muutoksen jälkeen ' + aika)
         // Lasketaan erotus millisekunteina
         let erotus =
           new Date(kellonaika.time).getTime() - new Date(aika).getTime();
