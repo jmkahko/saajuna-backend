@@ -82,6 +82,8 @@ const HavaintoAsemaController = {
         // Muodostetaan aika hakua varten määrämuotoisena
         const aika =
           vuosi + '-' + kuukausi + '-' + paiva + 'T' + tunti + ':' + minuutti;
+
+          console.log('Tunti Herokuussa ', tunti);
         // Lasketaan erotus millisekunteina
         let erotus =
           new Date(kellonaika.time).getTime() - new Date(aika).getTime();
