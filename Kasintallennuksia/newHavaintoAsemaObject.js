@@ -1,3 +1,4 @@
+// Luodaan uusi havaintoasema manuaalisesti
 const UusiHavaintoAsema = {
   name: 'Alajärvi Möksy',
   fmisid: 101533,

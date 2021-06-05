@@ -1,3 +1,4 @@
+// Luodaan uusi säähavainto manuaalisesti.
 const UusiSaaHavainto = {
   time: '2021-05-29T16:30:00Z',
   t2m: 8.2,

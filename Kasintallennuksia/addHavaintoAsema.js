@@ -1,4 +1,5 @@
 //----------TALLENNUS-------------------------------//
+// Tallennetaan uusi havaintoasema tietokantaan
 const Havaintoasema = require('./models/Havaintoasema');
 require('./dbconnection');
 const newHavaintoasemaObject = require('./newHavaintoAsemaObject');

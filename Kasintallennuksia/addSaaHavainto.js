@@ -1,4 +1,5 @@
 //----------TALLENNUS-------------------------------//
+// Tallennetaan uusi säähavainto tietokantaan
 const Saanyt = require('./models/Saanyt');
 require('./dbconnection');
 const newSaaHavaintoObject = require('./newSaaHavainto');
