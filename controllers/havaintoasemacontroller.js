@@ -56,7 +56,7 @@ const HavaintoAsemaController = {
         let vuosi = aika1.getFullYear();
         let kuukausi = aika1.getMonth() + 1;
         let paiva = aika1.getDate();
-        let tunti = aika1.getHours();
+        let tunti = aika1.getHours() - 3; // Ottaa tämä pois, kun siirtää Herokuuhun. Muuten ei toimi UTC aika
         let minuutti = aika1.getMinutes();
         // Pyöristetään minuutit alaspäin tasakymmenminuuteiksi, koska tieto haetaan fmi:n tietokannasta esim. 13.10, 13.20, 13.30
         minuutti = Math.floor(minuutti / 10) * 10;
@@ -222,7 +222,7 @@ const HavaintoAsemaController = {
     let vuosi = aika1.getFullYear();
     let kuukausi = aika1.getMonth() + 1;
     let paiva = aika1.getDate();
-    let tunti = aika1.getHours();
+    let tunti = aika1.getHours() - 3; // Ottaa tämä pois, kun siirtää Herokuuhun. Muuten ei toimi UTC aika
 
     // Lisätään kuukausiin, päiviin, tunteihin ja minuutteihin 0 eteen mikäli ne ovat pienempiä kuin 10.
     // Tällöin saadaan päivämäärätiedot oikeiksi ja määrämuotoisiksi hakua varten.
