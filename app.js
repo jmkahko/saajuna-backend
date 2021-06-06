@@ -14,6 +14,7 @@ const usersRouter = require('./routes/users');
 const asematRouter = require('./routes/asemat');
 const junatRouter = require('./routes/junat');
 const saaasematRouter = require('./routes/saaasemat');
+const favoritesRouter = require('./routes/favorites');
 
 const app = express();
 
@@ -51,6 +52,7 @@ app.use('/users', usersRouter);
 app.use('/asemat', asematRouter);
 app.use('/junat', junatRouter);
 app.use('/saaasemat', saaasematRouter);
+app.use('/favorites', favoritesRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

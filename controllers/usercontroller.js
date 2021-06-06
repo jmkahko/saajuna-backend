@@ -71,6 +71,37 @@ const UserController = {
       }
     );
   },
+
+  // Käyttäjän salasanan vaihto
+  changeUserPassword: function (req, res, next) { 
+    // salasana kryptataan ennen tallennusta tietokantaan
+    const hashedPassword = bcrypt.hashSync(req.body.password, 8);
+
+    // Päivitetään käyttäjän salasana
+    User.findByIdAndUpdate(
+      {_id: req.params.id},
+      {$set: {password: hashedPassword}},
+      (error, result) => {
+        if (error) {
+          throw error;
+        }
+        res.json('Salasana päivitetty');
+      })
+  },
+
+  // Käyttäjätunnuksen poisto
+  deleteUserAccount: function (req, res, next) { 
+    // deleteOne argumentit: {hakukriteeri (req.params.id saa request sanomassa tiedon)} eli _id:tä
+    // vastaava id saadaan clientilta, (callback jolla suoritetaan varsinainen haku)
+    User.deleteOne({ _id: req.params.id }, (error, result) => {
+      // Jos tulee virhe niin lähetetään virhesanoma
+      if (error) {
+        throw error;
+      }
+      res.json('Käyttäjä poistettu');
+    });
+  },
+
 };
 
 module.exports = UserController;
