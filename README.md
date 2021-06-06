@@ -11,13 +11,26 @@ Sovelluksessa haetaan tiedot sekä VR:n että Ilmatieteenlaitoksen avoimesta dat
 ## Kuvaus teknologioista
 
 Lyhyehkö kuvaus eri teknologioiden käyttämisestä työssä.
-Komennot, joilla kehitysversion saa Githubista omalle koneelle toimimaan
+Komennot, joilla kehitysversion saa Githubista omalle koneelle toimimaan.
+
+Lopputyö on tietokanta-pohjainen full-stack-sovellus, jossa on frontend ja backend, jonka taustalla on tietokanta.
+Backend on luotu Nodejs:llä ja Expressillä ja sen tietokantana on Mongodb (Atlas). Työ on julkaistu Heroku:hun.
+
+Frontend on luotu Angularilla. CRUD-toiminnot sijaitsevat frontendissä (käyttäjätunnusten luonti, muokkaus ja poisto sekä suosikkien lisäys, muokkaus ja poistaminen).
+
+Työn ovat tehneet yhdessä Janne ja Leena Kähkönen.
 
 ## Reflektio ja ajankäyttö
 
 Miten työ onnistui? Mikä oli helppoa, mikä vaikeaa? Kuinka paljon käytit aikaa loppuharjoitustyön tekemiseen? Mitä tietoja/taitoja sinun tulee vielä kehittää?
 
-## Käytetyt tutoriaalit
+Toistaiseksi työ on onnistunut hyvin. Vaikeinta on ollut aikatietojen muokkaaminen ja parserointi (UTC-aika).
+Aikaa on käytetty backendiin ainakin 30-40 h ja frontendiin xxx h.
+
+## Työssä hyödynnetyt tutoriaalit
+
+Kustakin tutoriaalista ilmoitetaan sen nimi ja osoite.
+Kunkin tutorialain osalta kirjataan tieto kuinka paljon kyseistä tutoriaalia on hyödynnetty ja kuinka paljon omaa koodia on tuotettu tutoriaalin lisäksi.
 
 Tour of Heroes https://angular.io/tutorial frontendissä.
 Backendissä on käytetty lähinnä Web-kehittäjä koulutuksen materiaaleja sekä ajan parseroimiseen ja muotoiluun on käytetty joitakin ohjeita StackOverFlow:sta.
