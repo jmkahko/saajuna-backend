@@ -7,6 +7,8 @@ const logger = require('morgan');
 // Tietokanta yhteys ja ENV tiedosto määrittely
 const mongoose = require('mongoose');
 require('dotenv').config(); //dotenv -moduuli tarvitaan jos aiotaan käyttää .env -filua
+const cors = require('cors'); // Corssin käyttöönotto
+
 
 // Reitit
 const indexRouter = require('./routes/index');
@@ -17,6 +19,15 @@ const saaasematRouter = require('./routes/saaasemat');
 const favoritesRouter = require('./routes/favorites');
 
 const app = express();
+
+// cors avaa yhteyden palvelinsovelluksen ja asiakassovelluksen välille, jos nämä sijaitsevat eri palvelimilla
+const corsOptions = {
+  origin: 'http://localhost:4200', // Frontendin osoite mihin saadaan ollaa yhteydessä
+  optionsSuccessStatus: 200,
+};
+
+// Otetaan cors käyttöön apppiin
+app.use(cors(corsOptions));
 
 // Tietokanta yhteyden muodostus
 mongoose.set('useUnifiedTopology', true); // määritys jota käytetään tietokantapalvelimen etsinnässä
