@@ -20,7 +20,4 @@ router.put('/changepassword/:id', authorize, UserController.changeUserPassword);
 // Tunnuksen poisto
 router.delete('/deleteuser/:id', authorize, UserController.deleteUserAccount);
 
-// Hae käyttäjän id
-router.get('/:username', UserController.userId);
-
 module.exports = router;

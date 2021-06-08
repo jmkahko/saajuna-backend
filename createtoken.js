@@ -5,6 +5,7 @@ function createToken(user) {
   const payload = {
     username: user.username, // Tämä ei ole välttämätön
     isadmin: user.isadmin,
+    id: user.id, // Lisätään käyttäjän id-tieto tokeniin. Onnistuu käyttäjän poisto ja salasanan vaihto
   };
 
   console.log(payload);

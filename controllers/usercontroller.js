@@ -102,20 +102,6 @@ const UserController = {
     });
   },
 
-  // Haetaan käyttäjän id-tieto
-  userId: function (req, res) { 
-    User.findOne(
-      { username: req.params.username },
-      (error, kayttaja) => {
-        // Jos tulee virhe niin lähetetään virhesanoma
-        if (error) {
-          throw error;
-        }
-        res.json(kayttaja['id']); // Lähetetään JSONina tietokannasta saatu tieto eteenpäin
-      }
-    );
-  }
-
 }
 
 module.exports = UserController;
