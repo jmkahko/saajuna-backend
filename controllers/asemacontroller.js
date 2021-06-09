@@ -1,6 +1,7 @@
 // Asema modellin tuonti
 const Asema = require('../models/Asema');
 const request = require('request');
+const { startSession } = require('../models/Asema');
 
 const AsemaController = {
   // Haetaan kaikki asemat
@@ -123,7 +124,63 @@ const AsemaController = {
       if (response.statusCode === 200) {
         // Parseroidaan tulos data muuttujaan
         let data = JSON.parse(response.body);
-        res.json(data[0]); // Palautetaan JSONina junan tieto
+
+        let asemantiedot = []; // Luodaan taulukko johon tallennetaan tiedot
+        let junientiedot = []; // Luodaan taulukko joohon tallennetaan junien tiedot
+
+        // Pyöräytetään ensimmäinen for silmukka kaikki junat jotka haku palauttaa
+        for (let i = 0; i < data.length; i++) {
+          junientiedot.push(['trainNumber', data[i]['trainNumber']]);
+          junientiedot.push(['trainType', data[i]['trainType']]); // Junatyyppi IC, Pendoliino ym.
+          junientiedot.push(['trainCategory', data[i]['trainCategory']]); // juna kategoria
+
+          // Asema jolta juna on lähtenyt
+          junientiedot.push(['startStation', data[i]['timeTableRows'][0]['stationShortCode']])
+
+          // Junan viimeinen asema
+          let timeTableRiveja = data[i]['timeTableRows'].length - 1;
+          junientiedot.push(['endStation', data[i]['timeTableRows'][timeTableRiveja]['stationShortCode']])
+          
+          // Halutun asemantiedot
+          junientiedot.push(['stationStop', station]);
+          // Jokainen juna erikseen for silmukassa
+          for (let x = 0; x < data[i]['timeTableRows'].length; x++) {
+            
+            // Haluttu asema
+            if (data[i]['timeTableRows'][x]['stationShortCode'] === station) {
+              // Saapuvan junan aikataulu UTC aika
+              if (data[i]['timeTableRows'][x]['type'] === 'ARRIVAL') {
+                junientiedot.push(['arrivalScheduledTime', data[i]['timeTableRows'][x]['scheduledTime']]);
+                junientiedot.push(['arrivalActualTime', data[i]['timeTableRows'][x]['actualTime']]);
+                junientiedot.push(['arrivalLiveEstimateTime', data[i]['timeTableRows'][x]['liveEstimateTime']]);
+                junientiedot.push(['arrivalDifferenceInMinutes', data[i]['timeTableRows'][x]['differenceInMinutes']]);
+              }
+
+              // Lähtevän junan aikataulu UTC aika
+              if (data[i]['timeTableRows'][x]['type'] === 'DEPARTURE') {
+                junientiedot.push(['departureScheduledTime', data[i]['timeTableRows'][x]['scheduledTime']]);           
+                junientiedot.push(['departureActualTime', data[i]['timeTableRows'][x]['actualTime']]);
+                junientiedot.push(['departureLiveEstimateTime', data[i]['timeTableRows'][x]['liveEstimateTime']]);
+                junientiedot.push(['departureDifferenceInMinutes', data[i]['timeTableRows'][x]['differenceInMinutes']]);
+              }
+            }
+          }
+
+          // Tehdään taulukosta objeckti
+          let arrayToObject = Object.fromEntries(new Map(junientiedot));  
+
+          // Tallennetaan junientiedon taulukko asemantiedot taulukkoon
+          asemantiedot.push(arrayToObject);
+          junientiedot = []; // Tyhjennetään taulukko
+        }
+
+        // Tulostetaan saatu tulos
+        console.log(asemantiedot);
+
+        // Lähetetään JSON sanomana taulukko eteenpäin
+        res.json(asemantiedot);
+
+
       } else {
         // Jos tulee muu kuin 200 vastaus viestissä, niin tulostetaan koodi ja virhe viesti
         console.log('Statuskoodi: ' + response.statusCode);
