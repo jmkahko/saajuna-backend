@@ -92,7 +92,7 @@ const AsemaController = {
       if (error) {
         throw error;
       }
-      res.send('Asemat poistettu'); // Lähetetään JSONina tietokannasta saatu tieto eteenpäin
+      res.json({ 'Asemat poistettu': result });  // Lähetetään JSONina tietokannasta saatu tieto eteenpäin
     });
   },
 
