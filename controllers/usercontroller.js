@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const User = require('../models/User.js');
+const Favorite = require('../models/Favorites.js')
 const createToken = require('../createtoken.js');
 
 const UserController = {
@@ -18,7 +19,7 @@ const UserController = {
         if (err) {
           return res.status(500).send('Käyttäjän rekisteröinti epäonnistui.');
         } else {
-          const token = createToken(user); // tokenin luontimetodi
+          const token = createToken(user); // tokenin luontimetodi  
           // palautetaan token JSON-muodossa
           res.json({
             success: true,
