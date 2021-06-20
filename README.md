@@ -4,9 +4,9 @@ Projektin frontend https://github.com/jmkahko/saajuna-frontend
 
 ## Yleisesittely
 
-Sovelluksen idea ja sen toiminnallisuus lyhyesti.
+### Sovelluksen idea ja sen toiminnallisuus lyhyesti.
 
-Sovelluksessa haetaan tiedot sekä VR:n että Ilmatieteenlaitoksen avoimesta datasta ja tuodaan ne käyttäjälle näkyviin sovellukseen. Käyttäjä voi luoda sovellukseen oman käyttäjätunnuksen, jolla siihen voi tallentaa 3 kpl suosikkeja (esim. suosikkipaikkakuntia tai asemia).
+Sovelluksessa haetaan tiedot sekä VR:n että Ilmatieteenlaitoksen avoimesta datasta ja tuodaan ne käyttäjälle näkyviin sovellukseen. Käyttäjä voi luoda sovellukseen oman käyttäjätunnuksen, jolla siihen voi tallentaa 3 kpl suosikkeja (esim. suosikkipaikkakuntia tai asemia). Käyttäjä voi poistaa käyttäjätunnuksen ja vaihtaa sen salasanan. Admin-käyttäjä voi tehdä muutoksia tietokantaan. Admin-käyttäjiä ei voi luoda nettisivun kautta.
 
 ## Kuvaus teknologioista
 
@@ -18,7 +18,11 @@ Backend on luotu Nodejs:llä ja Expressillä ja sen tietokantana on Mongodb (Atl
 
 Frontend on luotu Angularilla. CRUD-toiminnot sijaitsevat frontendissä (käyttäjätunnusten luonti, muokkaus ja poisto sekä suosikkien lisäys, muokkaus ja poistaminen).
 
-Työn ovat tehneet yhdessä Janne ja Leena Kähkönen.
+Työn ovat tehneet yhdessä Janne ja Leena Kähkönen. Molemmat ovat osallistuneet sekä backendin että frontendin kehittämiseen.
+
+### Komennot
+
+xxx
 
 ## Reflektio ja ajankäyttö
 
