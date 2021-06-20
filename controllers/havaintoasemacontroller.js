@@ -5,7 +5,7 @@ const https = require('https'); // XML-parserointiin säätiedosta
 const xml2js = require('xml2js'); // XML-parserointiin säätiedosta
 const parser = new xml2js.Parser(); // XML-parserointiin säätiedosta
 
-// Asema modellin tuonti
+// Asema modelin tuonti
 const HavaintoAsemaController = {
   // Haetaan kaikki havaintoasemat
   haeKaikki: (req, res) => {
@@ -83,10 +83,9 @@ const HavaintoAsemaController = {
         const aika =
           vuosi + '-' + kuukausi + '-' + paiva + 'T' + tunti + ':' + minuutti;
 
-          console.log('Aika ennen muutosta ' + aika);
+        console.log('Aika ennen muutosta ' + aika);
 
-          
-          console.log('Aika muutoksen jälkeen ' + aika)
+        console.log('Aika muutoksen jälkeen ' + aika);
         // Lasketaan erotus millisekunteina
         let erotus =
           new Date(kellonaika.time).getTime() - new Date(aika).getTime();
