@@ -1,7 +1,6 @@
 // Asema modellin tuonti
 const Asema = require('../models/Asema');
 const request = require('request');
-const { startSession } = require('../models/Asema');
 
 const AsemaController = {
   // Haetaan kaikki asemat
