@@ -27,7 +27,7 @@ const JunaController = {
       if (response.statusCode === 200) {
         // Parseroidaan tulos data muuttujaan
         let data = JSON.parse(response.body);
-        res.json([data[0]]); // Palautetaan JSONina junan tieto
+        res.json(data[0]); // Palautetaan JSONina junan tieto
       } else {
         // Jos tulee muu kuin 200 vastaus viestissä, niin tulostetaan koodi ja virhe viesti
         console.log('Statuskoodi: ' + response.statusCode);
@@ -131,7 +131,7 @@ const JunaController = {
             let arrayToObject = Object.fromEntries(new Map(junanaikataulu));  
     
             // Lähetetään JSON sanomana taulukko eteenpäin taulukkona
-            res.json([arrayToObject]);
+            res.json(arrayToObject);
     
           } else {
             // Jos tulee muu kuin 200 vastaus viestissä, niin tulostetaan koodi ja virhe viesti
@@ -139,11 +139,7 @@ const JunaController = {
             console.log('Virhe: ' + error);
           }
         });
-
-        
       });
-
-    
   },
 }
 
