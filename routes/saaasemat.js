@@ -5,6 +5,9 @@ const havaintoasemacontroller = require('../controllers/havaintoasemacontroller'
 // Haetaan kaikki havaintoasemat
 router.get('/', havaintoasemacontroller.haeKaikki);
 
+// Haetaan tietty havaintoasema id:llä
+router.get('/:id', havaintoasemacontroller.haeAsemaIDlla);
+
 // Haetaan tietty havaintoasema
 router.get('/:fmisid', havaintoasemacontroller.haeAsemaNimella);
 
