@@ -32,6 +32,17 @@ const HavaintoAsemaController = {
     );
   },
 
+  // Haetaan tietty havaintoasema ID:llä
+  haeAsemaIDlla: (req, res) => {
+    Havaintoasema.findOne({ _id: req.params.id }, (error, havaintoasema) => {
+      // Jos tulee virhe niin lähetetään virhesanoma
+      if (error) {
+        throw error;
+      }
+      res.json(havaintoasema); // Lähetetään JSONina tietokannasta saatu tieto eteenpäin
+    });
+  },
+
   // Hae havaintoaseman säätieto. Päivittyy 10 minuutin välein
   haeHavaintoasemanSaa: (req, response) => {
     const fmisid = req.params.fmisid; // Saadaan päivätieto
