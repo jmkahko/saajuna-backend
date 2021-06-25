@@ -27,7 +27,14 @@ const JunaController = {
       if (response.statusCode === 200) {
         // Parseroidaan tulos data muuttujaan
         let data = JSON.parse(response.body);
-        res.json(data[0]); // Palautetaan JSONina junan tieto
+
+        // Tarkistetaan, että onko junalla paikkatietoja saatavilla
+        if (data.length === 0) {
+          res.json([])
+        } else {
+          res.json(data[0]); // Palautetaan JSONina junan tieto
+        }
+
       } else {
         // Jos tulee muu kuin 200 vastaus viestissä, niin tulostetaan koodi ja virhe viesti
         console.log('Statuskoodi: ' + response.statusCode);
@@ -66,73 +73,78 @@ const JunaController = {
           if (response.statusCode === 200) {
             // Parseroidaan tulos data muuttujaan
             let data = JSON.parse(response.body);
-    
-            let junanaikataulu = []; // Luodaan taulukko joohon tallennetaan junan tiedot
-            let pysakit = []; // Tallennetaan miten on pysähdytty
-    
-            // Junan tietoja
-            junanaikataulu.push(['trainNumber', data[0]['trainNumber']])
-            junanaikataulu.push(['trainType', data[0]['trainType']]); // Junatyyppi IC, Pendoliino ym.
-            junanaikataulu.push(['trainCategory', data[0]['trainCategory']]); // juna kategoria
 
-            // Junan viimeinen asema
-            let timeTableRiveja = data[0]['timeTableRows'].length - 1;
-
-            // Käydään läpi tiedot, että saadaan asema-taulusta aseman kokonimi
-            for (let z = 0; z < asemat.length; z++) {
-
-              // Asemalta jolta juna on lähtenyt kokonimi
-              if (data[0]['timeTableRows'][0]['stationShortCode'] === asemat[z].stationShortCode) {
-                junanaikataulu.push(['startStationLongName', asemat[z].stationName])
-              }
-            
-              // Junan viimeinen asema kokonimi
-                if (data[0]['timeTableRows'][timeTableRiveja]['stationShortCode'] === asemat[z].stationShortCode) {
-                  junanaikataulu.push(['endStationLongName', asemat[z].stationName])
-                }
-            }
-    
-            // Asema jolta juna on lähtenyt
-            junanaikataulu.push(['startStationShortCode', data[0]['timeTableRows'][0]['stationShortCode']])
-    
-            // Junan viimeinen asema
-            junanaikataulu.push(['endStationShortCode', data[0]['timeTableRows'][timeTableRiveja]['stationShortCode']])
-            
-            let aikataulu = []; // Laitetaan taulukkoon saadut pysäkit
-            // Jokainen aseman aikataulu
-            for (let x = 0; x < data[0]['timeTableRows'].length; x++) {
-    
-              // Tallennetaan aikataulu tieto
-              aikataulu.push(['stationShortCode', data[0]['timeTableRows'][x]['stationShortCode']]);
-
+            // Tarkistetaan, että onko aikataulutietoa saatavilla
+            if (data.length === 0) {
+              res.json([]) // Jos paluusanomassa tulee tyhjä taulukko, niin lähetetään se myös eteenpäin
+            } else {
+              let junanaikataulu = []; // Luodaan taulukko joohon tallennetaan junan tiedot
+              let pysakit = []; // Tallennetaan miten on pysähdytty
+      
+              // Junan tietoja
+              junanaikataulu.push(['trainNumber', data[0]['trainNumber']])
+              junanaikataulu.push(['trainType', data[0]['trainType']]); // Junatyyppi IC, Pendoliino ym.
+              junanaikataulu.push(['trainCategory', data[0]['trainCategory']]); // juna kategoria
+  
+              // Junan viimeinen asema
+              let timeTableRiveja = data[0]['timeTableRows'].length - 1;
+  
               // Käydään läpi tiedot, että saadaan asema-taulusta aseman kokonimi
               for (let z = 0; z < asemat.length; z++) {
-                // Rautatieaseman kokonimi
-                if (data[0]['timeTableRows'][x]['stationShortCode'] === asemat[z].stationShortCode) {
-                  aikataulu.push(['stationLongName', asemat[z].stationName])
+  
+                // Asemalta jolta juna on lähtenyt kokonimi
+                if (data[0]['timeTableRows'][0]['stationShortCode'] === asemat[z].stationShortCode) {
+                  junanaikataulu.push(['startStationLongName', asemat[z].stationName])
                 }
+              
+                // Junan viimeinen asema kokonimi
+                  if (data[0]['timeTableRows'][timeTableRiveja]['stationShortCode'] === asemat[z].stationShortCode) {
+                    junanaikataulu.push(['endStationLongName', asemat[z].stationName])
+                  }
               }
-
-              aikataulu.push(['type', data[0]['timeTableRows'][x]['type']]);
-              aikataulu.push(['trainStopping', data[0]['timeTableRows'][x]['trainStopping']]);
-              aikataulu.push(['scheduledTime', data[0]['timeTableRows'][x]['scheduledTime']]);           
-              aikataulu.push(['actualTime', data[0]['timeTableRows'][x]['actualTime']]);
-              aikataulu.push(['liveEstimateTime', data[0]['timeTableRows'][x]['liveEstimateTime']]);
-              aikataulu.push(['differenceInMinutes', data[0]['timeTableRows'][x]['differenceInMinutes']]);
-    
-    
-              // Tehdään aikataulu taulukosta objeckti ja tallennetaan pysäkit taulukkoon
-              let aikatauluToObject = Object.fromEntries(new Map(aikataulu)); 
-              pysakit.push(aikatauluToObject);
+      
+              // Asema jolta juna on lähtenyt
+              junanaikataulu.push(['startStationShortCode', data[0]['timeTableRows'][0]['stationShortCode']])
+      
+              // Junan viimeinen asema
+              junanaikataulu.push(['endStationShortCode', data[0]['timeTableRows'][timeTableRiveja]['stationShortCode']])
+              
+              let aikataulu = []; // Laitetaan taulukkoon saadut pysäkit
+              // Jokainen aseman aikataulu
+              for (let x = 0; x < data[0]['timeTableRows'].length; x++) {
+      
+                // Tallennetaan aikataulu tieto
+                aikataulu.push(['stationShortCode', data[0]['timeTableRows'][x]['stationShortCode']]);
+  
+                // Käydään läpi tiedot, että saadaan asema-taulusta aseman kokonimi
+                for (let z = 0; z < asemat.length; z++) {
+                  // Rautatieaseman kokonimi
+                  if (data[0]['timeTableRows'][x]['stationShortCode'] === asemat[z].stationShortCode) {
+                    aikataulu.push(['stationLongName', asemat[z].stationName])
+                  }
+                }
+  
+                aikataulu.push(['type', data[0]['timeTableRows'][x]['type']]);
+                aikataulu.push(['trainStopping', data[0]['timeTableRows'][x]['trainStopping']]);
+                aikataulu.push(['scheduledTime', data[0]['timeTableRows'][x]['scheduledTime']]);           
+                aikataulu.push(['actualTime', data[0]['timeTableRows'][x]['actualTime']]);
+                aikataulu.push(['liveEstimateTime', data[0]['timeTableRows'][x]['liveEstimateTime']]);
+                aikataulu.push(['differenceInMinutes', data[0]['timeTableRows'][x]['differenceInMinutes']]);
+      
+      
+                // Tehdään aikataulu taulukosta objeckti ja tallennetaan pysäkit taulukkoon
+                let aikatauluToObject = Object.fromEntries(new Map(aikataulu)); 
+                pysakit.push(aikatauluToObject);
+              }
+      
+              // Tehdään taulukosta objeckti
+              junanaikataulu.push(['timeTableRows', pysakit])
+              let arrayToObject = Object.fromEntries(new Map(junanaikataulu));  
+      
+              // Lähetetään JSON sanomana taulukko eteenpäin taulukkona
+              res.json(arrayToObject);
             }
-    
-            // Tehdään taulukosta objeckti
-            junanaikataulu.push(['timeTableRows', pysakit])
-            let arrayToObject = Object.fromEntries(new Map(junanaikataulu));  
-    
-            // Lähetetään JSON sanomana taulukko eteenpäin taulukkona
-            res.json(arrayToObject);
-    
+  
           } else {
             // Jos tulee muu kuin 200 vastaus viestissä, niin tulostetaan koodi ja virhe viesti
             console.log('Statuskoodi: ' + response.statusCode);
