@@ -29,7 +29,7 @@ const SaaennusteSchema = new mongoose.Schema({
   RadiationNetSurfaceSWAccumulation: { type: Number },
   RadiationDiffuseAccumulation: { type: Number },
   LandSeaMask: { type: Number },
-  place: { type: String }, // Paikannimi esim. Kajaani
+  latlon: { type: String }, // Paikan koordinaatit esim. 64.22,27.75
 });
 
 // Tehdään skeemasta model, jonka metodeilla kantaoperaatioita suoritetaan. Model on luokka joka sisältää skeeman

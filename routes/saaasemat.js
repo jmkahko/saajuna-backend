@@ -21,6 +21,9 @@ router.get(
 );
 
 // Haetaan tietyn havaintoaseman sääennuste paikan nimellä
-router.get('/saaennuste/:latlon', havaintoasemacontroller.haeAsemaSaaEnnuste);
+router.get(
+  '/saaennuste/latlon/:latlon',
+  havaintoasemacontroller.haeAsemaSaaEnnuste
+);
 
 module.exports = router;

@@ -394,6 +394,116 @@ const HavaintoAsemaController = {
 
   // Hae paikkakunnan sääennuste koordinaateilla. Saadaan tunnin välein Ilmatieteenlaitokselta.
   haeAsemaSaaEnnuste: (req, response) => {
+    const latlon = req.params.latlon; // Saadaan leveysasteen koordinaatit
+
+    let aika1 = new Date();
+    aika1.setSeconds(0, 0); // Määritellään ajasta sekunnit ja millisekunnit nolliksi
+
+    // Ajan muunnoksia (vuosi, kuukausi, päivä, tunti ja minuutti). Sekunnit ja millisekunnit jätetään pois.
+    // FMI käyttää päivämäärä-tiedossaan UTC-aikaa, joten esimerkiksi tunneista pitää vähentää 3, jotta saadaan
+    // haku tapahtumaan oikeana aikana.
+    let vuosi = aika1.getFullYear();
+    let kuukausi = aika1.getMonth() + 1;
+    let paiva = aika1.getDate();
+    let tunti = aika1.getHours() - 3; // Ottaa tämä pois, kun siirtää Herokuuhun. Muuten ei toimi UTC aika
+
+    // Lisätään kuukausiin, päiviin, tunteihin ja minuutteihin 0 eteen mikäli ne ovat pienempiä kuin 10.
+    // Tällöin saadaan päivämäärätiedot oikeiksi ja määrämuotoisiksi hakua varten.
+    if (kuukausi < 10) {
+      kuukausi = '0' + kuukausi;
+    }
+
+    if (paiva < 10) {
+      paiva = '0' + paiva;
+    }
+
+    if (tunti < 10) {
+      tunti = '0' + tunti;
+    }
+
+    // Muodostetaan aika hakua varten määrämuotoisena
+    const aika =
+      vuosi + '-' + kuukausi + '-' + paiva + 'T' + tunti + ':' + '00';
+
+    // Tulostetaan kuluva aika, tietokantaan tallennettu viimeisin, paljonko erotus ajoissa
+    console.log(aika1);
+
+    const url =
+      //'http://opendata.fmi.fi/wfs?service=WFS&version=2.0.0&request=getFeature&storedquery_id=fmi::forecast::hirlam::surface::point::timevaluepair&place=jaala&latlon=60.1,19.9&'
+      'https://opendata.fmi.fi/wfs?request=getFeature&storedquery_id=fmi::forecast::hirlam::surface::point::simple&starttime=' +
+      aika +
+      '&endtime=' +
+      aika +
+      '&latlon=' +
+      latlon;
+
+    console.log(url);
+    parser.on('error', function (err) {
+      console.log('Parser error', err);
+    });
+    // Luodaan taulukko, johon data haetaan
+    let data = '';
+    let taulukko = [];
+    https.get(url, function (res) {
+      if (res.statusCode >= 200 && res.statusCode < 400) {
+        res.on('data', function (data_) {
+          data += data_.toString();
+        });
+        res.on('end', function () {
+          // Parseroidaan saatu tulos result muuttujaan
+          parser.parseString(data, function (err, result) {
+            // Tehdään try catch menettelyllä tietojen tallennus. Jos XML on tyhjä, niin ohjelman suoritus ei lakkaa kokonaan.
+
+            taulukko.push([
+              'time',
+              result['wfs:FeatureCollection']['wfs:member'][0][
+                'BsWfs:BsWfsElement'
+              ][0]['BsWfs:Time'].join(),
+            ]);
+
+            // Lisätään mittaus arvot taulukkoon
+            for (let x = 0; x <= 23; x++) {
+              // Haetaan parametrin nimi
+              let parametrinimi =
+                result['wfs:FeatureCollection']['wfs:member'][x][
+                  'BsWfs:BsWfsElement'
+                ][0]['BsWfs:ParameterName'].join();
+
+              // Haetaan mittaus tulos
+              let parametritulos =
+                result['wfs:FeatureCollection']['wfs:member'][x][
+                  'BsWfs:BsWfsElement'
+                ][0]['BsWfs:ParameterValue'].join();
+
+              // Muutetetaan saatu NaN tulos null arvoon, joka tallennetaan tietokantaan.
+              if (parametritulos === 'NaN') {
+                taulukko.push([parametrinimi, null]);
+              } else {
+                taulukko.push([parametrinimi, Number(parametritulos)]);
+              }
+            }
+
+            // Lisätään koordinaatit taulukkoon
+            taulukko.push(['latlon', latlon]);
+
+            // Muutetaan taulukko objectiksi
+            const arrayToObject = Object.fromEntries(new Map(taulukko));
+
+            // Tulostetaan saatu tulos
+            console.log(arrayToObject);
+
+            // Tallennetaan saatu tulos tietokantaan
+            const newSaaEnnuste = Saaennuste(arrayToObject);
+
+            response.json(newSaaEnnuste);
+          });
+        });
+      }
+    });
+  },
+
+  // Hae paikkakunnan sääennuste koordinaateilla. Saadaan tunnin välein Ilmatieteenlaitokselta.
+  oldhaeAsemaSaaEnnusteOLDOLDOLDLEENAN: (req, response) => {
     const lat = req.params.latitude; // Saadaan leveysasteen koordinaatit
     const lon = req.params.longitude; // Saadaan pituusasteen koordinaatit
 
@@ -474,8 +584,6 @@ const HavaintoAsemaController = {
             lon;
 
           console.log(url);
-          console.log(lat);
-          console.log(lon);
           parser.on('error', function (err) {
             console.log('Parser error', err);
           });
