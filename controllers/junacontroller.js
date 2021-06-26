@@ -85,6 +85,7 @@ const JunaController = {
               junanaikataulu.push(['trainNumber', data[0]['trainNumber']])
               junanaikataulu.push(['trainType', data[0]['trainType']]); // Junatyyppi IC, Pendoliino ym.
               junanaikataulu.push(['trainCategory', data[0]['trainCategory']]); // juna kategoria
+              junanaikataulu.push(['runningCurrently', data[0]['runningCurrently']]); // juna kulussa
   
               // Junan viimeinen asema
               let timeTableRiveja = data[0]['timeTableRows'].length - 1;
@@ -124,12 +125,13 @@ const JunaController = {
                   }
                 }
   
-                aikataulu.push(['type', data[0]['timeTableRows'][x]['type']]);
-                aikataulu.push(['trainStopping', data[0]['timeTableRows'][x]['trainStopping']]);
-                aikataulu.push(['scheduledTime', data[0]['timeTableRows'][x]['scheduledTime']]);           
-                aikataulu.push(['actualTime', data[0]['timeTableRows'][x]['actualTime']]);
-                aikataulu.push(['liveEstimateTime', data[0]['timeTableRows'][x]['liveEstimateTime']]);
-                aikataulu.push(['differenceInMinutes', data[0]['timeTableRows'][x]['differenceInMinutes']]);
+                aikataulu.push(['type', data[0]['timeTableRows'][x]['type']]); // Saapuuko vai lähteekö juna
+                aikataulu.push(['trainStopping', data[0]['timeTableRows'][x]['trainStopping']]); // Pysähtyykö asemalle
+                aikataulu.push(['commercialTrack', data[0]['timeTableRows'][x]['commercialTrack']]); // Raide jolle juna pysähtyy
+                aikataulu.push(['scheduledTime', data[0]['timeTableRows'][x]['scheduledTime']]); // Aikataulu          
+                aikataulu.push(['actualTime', data[0]['timeTableRows'][x]['actualTime']]); // Todellinen 
+                aikataulu.push(['liveEstimateTime', data[0]['timeTableRows'][x]['liveEstimateTime']]); // live seurannasta?
+                aikataulu.push(['differenceInMinutes', data[0]['timeTableRows'][x]['differenceInMinutes']]); // aikataulu ero
       
       
                 // Tehdään aikataulu taulukosta objeckti ja tallennetaan pysäkit taulukkoon
