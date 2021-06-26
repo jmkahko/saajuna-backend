@@ -11,12 +11,12 @@ const SaanytSchema = new mongoose.Schema({
   rh: { type: Number }, // Kosteus
   td: { type: Number }, // Kastepiste
   r_1h: { type: Number }, // Sademäärä tunnissa
-  ri_10min: { type: Number }, //
+  ri_10min: { type: Number }, // Sateen rankkuus
   snow_aws: { type: Number }, // Lumensyvyys
   p_sea: { type: Number }, // Paine
   vis: { type: Number }, // Näkyvyys
   n_man: { type: Number }, // Pilvisyys
-  wawa: { type: Number }, // wawa
+  wawa: { type: Number }, // Säätila
   fmisid: { type: Number }, // esim. Kajaani Petäisenniska 126736
 });
 

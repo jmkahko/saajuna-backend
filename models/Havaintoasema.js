@@ -7,8 +7,8 @@ const HavaintoasemaSchema = new mongoose.Schema({
   fmisid: { type: Number }, // FMISID, havaintoaseman yksilöllinen ID
   lpnn: { type: Number }, // LPNN
   wmo: { type: Number }, //  WMO
-  longitude: { type: String, max: 9 }, // "25.006783"
-  latitude: { type: String, max: 9 }, // "64.537118"
+  latitude: { type: String, max: 9 }, // "64.537118" leveysasteen koordinaatit
+  longitude: { type: String, max: 9 }, // "25.006783" pituus asteen koordinaatit
   altitude: { type: Number }, // Korkeus merenpinnasta
   group: { type: String }, // Ryhmä
   start: { type: String }, // Alkaen, milloin kyseinen havaintoasema on otettu käyttöön
