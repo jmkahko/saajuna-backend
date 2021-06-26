@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const SaaennusteSchema = new mongoose.Schema({
   time: { type: String }, // Kellonaika
   GeopHeight: { type: Number },
-  Temperature: { type: Number },
+  Temperature: { type: Number }, //Lämpötila
   Pressure: { type: Number },
   Humidity: { type: Number },
   WindDirection: { type: Number },
