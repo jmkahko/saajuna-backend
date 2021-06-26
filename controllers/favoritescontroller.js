@@ -1,16 +1,16 @@
 // Asema modellin tuonti
 const Favorites = require('../models/Favorites')
-const request = require('request');
 
 const FavoritesController = {
+
   // Hae käyttäjän suosikit
   haeKayttajanSuosikit: (req, res) => {
-    Favorites.findOne({ username: req.params.username }, (error, suosikit) => {
+    Favorites.findOne({ username: req.params.username }, (error, suosikki) => {
       // Jos tulee virhe niin lähetetään virhesanoma
       if (error) {
         throw error;
       }
-      res.json(suosikit); // Lähetetään JSONina tietokannasta saatu tieto eteenpäin
+      res.json(suosikki); // Lähetetään JSONina tietokannasta saatu tieto eteenpäin
     });
   },
 
@@ -27,15 +27,26 @@ const FavoritesController = {
   },
 
   lisaaKayttajanSuosikit: (req, res) => {
-    const NewFavorites = Favorites(req.body);
 
-    NewFavorites.save((error, result) => {
-      if (error) {
-        throw error;
+    Favorites.create(
+      {
+        username: req.body.username,
+        favoritesSaa1: req.body.favoritesSaa1,
+        favoritesSaa2: req.body.favoritesSaa2,
+        favoritesJuna1: req.body.favoritesJuna1,
+        favoritesJuna2: req.body.favoritesJuna2
+      },
+      (err, favorites) => {
+        if (err) {
+          return res.status(500).send('Suosikkien lisäykset epäonnistui');
+        } else {
+          // palautetaan token JSON-muodossa
+          res.json({
+            success: true
+          });
+        }
       }
-
-      res.json(result);
-    })
+    )
   }
 
 };
