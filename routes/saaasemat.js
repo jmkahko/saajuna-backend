@@ -15,6 +15,12 @@ router.get('/:fmisid', havaintoasemacontroller.haeAsemaNimella);
 router.get('/saanyt/:fmisid', havaintoasemacontroller.haeHavaintoasemanSaa);
 
 // Haetaan tietyn havaintoaseman sääennuste paikan nimellä
-router.get('/saaennuste/:place', havaintoasemacontroller.haeAsemaSaaEnnuste);
+router.get(
+  '/saaennuste/:place',
+  havaintoasemacontroller.haeAsemaSaaEnnustePlace
+);
+
+// Haetaan tietyn havaintoaseman sääennuste paikan nimellä
+router.get('/saaennuste/:latlon', havaintoasemacontroller.haeAsemaSaaEnnuste);
 
 module.exports = router;

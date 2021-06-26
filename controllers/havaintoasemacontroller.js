@@ -392,9 +392,8 @@ const HavaintoAsemaController = {
     ).sort({ _id: -1 });
   },
 
-  // Hae paikkakunnan sääennuste koordinaateilla. Saadaan tunnin välein
+  // Hae paikkakunnan sääennuste koordinaateilla. Saadaan tunnin välein Ilmatieteenlaitokselta.
   haeAsemaSaaEnnuste: (req, response) => {
-    const place = req.params.place; // Saadaan paikkakunta
     const lat = req.params.latitude; // Saadaan leveysasteen koordinaatit
     const lon = req.params.longitude; // Saadaan pituusasteen koordinaatit
 
@@ -428,9 +427,8 @@ const HavaintoAsemaController = {
       vuosi + '-' + kuukausi + '-' + paiva + 'T' + tunti + ':' + '00';
 
     Saaennuste.findOne(
-      { place: req.params.place },
-      { place: req.params.latitude },
-      { place: req.params.longitude },
+      { latitude: req.params.latitude }, //haetaan koordinaatit
+      { longitude: req.params.longitude },
       { _id: false, time: true },
       (error, kellonaika) => {
         // Jos tulee virhe niin lähetetään virhesanoma
@@ -451,9 +449,8 @@ const HavaintoAsemaController = {
 
         if (erotustunnit === 3) {
           Saaennuste.findOne(
-            { place: req.params.place },
-            { place: req.params.latitude },
-            { place: req.params.longitude },
+            { latitude: req.params.latitude },
+            { longitude: req.params.longitude },
             (error, saaennuste) => {
               // Jos tulee virhe niin lähetetään virhesanoma
               if (error) {
@@ -471,8 +468,6 @@ const HavaintoAsemaController = {
             aika +
             '&endtime=' +
             aika +
-            '&place=' +
-            place +
             '&latlon=' +
             lat +
             ',' +
@@ -529,8 +524,8 @@ const HavaintoAsemaController = {
                       }
                     }
 
-                    // Lisätään paikkakunta taulukkoon
-                    taulukko.push(['place', place]);
+                    // Lisätään koordinaatit taulukkoon
+                    taulukko.push(['latitude', lat], ['longitude', lon]);
 
                     // Muutetaan taulukko objectiksi
                     const arrayToObject = Object.fromEntries(new Map(taulukko));
@@ -557,9 +552,8 @@ const HavaintoAsemaController = {
                     function tallennuksenhaku() {
                       // Lähetetään viimeisin mittaustulos
                       Saaennuste.findOne(
-                        { place: req.params.place },
-                        { place: req.params.latitude },
-                        { place: req.params.longitude },
+                        { latitude: req.params.latitude },
+                        { longitude: req.params.longitude },
                         (error, saaennuste) => {
                           // Jos tulee virhe niin lähetetään virhesanoma
                           if (error) {
