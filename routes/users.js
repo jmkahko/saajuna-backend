@@ -3,10 +3,8 @@ const router = express.Router();
 const UserController = require('../controllers/usercontroller');
 const authorize = require('../verifytoken'); // authorisoinnin vahvistu
 
-/* GET users listing. */
-router.get('/', function (req, res, next) {
-  res.send('respond with a resource');
-});
+// Hae kaikki käyttäjät
+router.get('/', authorize, UserController.allUser);
 
 // Uuden käyttäjän rekisteröinti
 router.post('/register', UserController.registerUser);

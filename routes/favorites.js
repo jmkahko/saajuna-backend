@@ -3,6 +3,9 @@ const router = express.Router();
 const FavoritesController = require('../controllers/favoritescontroller')
 const authorize = require('../verifytoken'); // authorisoinnin vahvistu
 
+// Hae kaikki suosikit
+router.get('/', authorize, FavoritesController.haeKaikki);
+
 // Haetaan käyttäjän suosikit
 router.get('/:username', authorize, FavoritesController.haeKayttajanSuosikit);
 
@@ -11,5 +14,8 @@ router.put('/:id', authorize, FavoritesController.muutaKayttajanSuosikit);
 
 // Lisätään käyttäjän suosikit
 router.post('/', authorize, FavoritesController.lisaaKayttajanSuosikit)
+
+// Poista käyttäjän tunnus id:llä
+router.delete('/deletefavorite/:id', authorize, FavoritesController.poistaTunnus)
 
 module.exports = router;

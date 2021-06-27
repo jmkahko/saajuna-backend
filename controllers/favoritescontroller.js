@@ -3,6 +3,17 @@ const Favorites = require('../models/Favorites')
 
 const FavoritesController = {
 
+  // Haetaan kaikki suosikit
+  haeKaikki: (req, res) => {
+    Favorites.find((error, suosikit) => {
+      if (error) {
+        throw error;
+      }
+
+      res.json(suosikit);
+    });
+  },
+
   // Hae käyttäjän suosikit
   haeKayttajanSuosikit: (req, res) => {
     Favorites.findOne({ username: req.params.username }, (error, suosikki) => {
@@ -47,8 +58,19 @@ const FavoritesController = {
         }
       }
     )
-  }
+  },
 
+  poistaTunnus: (req, res) => {
+    // deleteOne argumentit: {hakukriteeri (req.params.id saa request sanomassa tiedon)} eli _id:tä
+    // vastaava id saadaan clientilta, (callback jolla suoritetaan varsinainen haku)
+    Favorites.deleteOne({ _id: req.params.id }, (error, result) => {
+      // Jos tulee virhe niin lähetetään virhesanoma
+      if (error) {
+        throw error;
+      }
+      res.json('Käyttäjä poistettu');
+    });
+  }
 };
 
 module.exports = FavoritesController;

@@ -4,6 +4,18 @@ const Favorite = require('../models/Favorites.js')
 const createToken = require('../createtoken.js');
 
 const UserController = {
+
+  // Haetaan kaikki käyttäjät
+  allUser: (req, res) => {
+    User.find((error, kayttajat) => {
+      if (error) {
+        throw error;
+      }
+  
+      res.json(kayttajat);
+    });
+  },
+
   // uuden käyttäjän rekisteröinti
   registerUser: function (req, res, next) {
     // salasana kryptataan ennen tallennusta tietokantaan
