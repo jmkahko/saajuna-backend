@@ -43,7 +43,7 @@ const UserController = {
     );
   },
 
-  // olemassa olevan käyttäjän autentikaatio, jos autentikaatio onnistuu, käyttäjälle luodaan token
+  // Kirjaudutaan sisään
   authenticateUser: function (req, res, next) {
     // etsitään käyttäjä kannasta http-pyynnöstä saadun käyttäjätunnuksen perusteella
     User.findOne(
@@ -63,8 +63,7 @@ const UserController = {
         } else if (user) {
           // console.log(req.body.password); // lomakkelle syötetty salasana
           // console.log(user.password); // kannassa oleva salasana
-          // verrataan lomakkeelle syötettyä salasanaa kannassa olevaan salasanaan
-          // jos vertailtavat eivät ole samat, palautetaan tieto siitä että salasana oli väärä
+          // verrataan lomakkeelle syötettyä salasanaa kannassa olevaan salasanaan, jos tiedot ovat eri palautetaan virhe
           if (bcrypt.compareSync(req.body.password, user.password) === false) {
             res.json({
               success: false,

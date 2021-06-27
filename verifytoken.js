@@ -3,8 +3,7 @@ const secret = process.env.SECRET;
 
 // verifyToken -funktio ottaa vastaan tokenin, dekoodaa ja tarkistaa sen
 function verifyToken(req, res, next) {
-  // otetaan vastaan token kahdella vaihtoehtoisella tavalla riippuen siitä onko se lähetetty
-  // bodyssä vai headerissa
+  // otetaan vastaan token kahdella vaihtoehtoisella tavalla riippuen siitä onko se lähetetty bodyssä vai headerissa
   const token = req.body.token || req.headers['x-access-token'];
   // dekoodataan eli puretaan token
   if (token) {

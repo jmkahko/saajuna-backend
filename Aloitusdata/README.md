@@ -10,12 +10,6 @@ Säähavaintoasemien lataus MongoDB-tietokantaan
 mongoimport --uri mongodb+srv://<KÄYTTÄJÄTUNNUS>:<SALASANA>@<MONGO CLUSTER>.doqpu.mongodb.net/<TIETOKANTA> --collection havaintoasemas --type=csv --headerline --file=saaasemat.csv
 ```
 
-## Sääennusteiden aloitusdata
-
-```
-mongoimport --uri mongodb+srv://<KÄYTTÄJÄTUNNUS>:<SALASANA>@<MONGO CLUSTER>.doqpu.mongodb.net/<TIETOKANTA> --collection saaennustes --type=csv --headerline --file=saaennuste_alkudata.csv
-```
-
 ## Säähavaintoasemien aloitusdata
 
 ```

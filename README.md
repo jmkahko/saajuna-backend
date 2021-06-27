@@ -24,20 +24,34 @@ Frontend on luotu Angularilla. CRUD-toiminnot sijaitsevat frontendissä (käytt�
 
 xxx
 
+Määrityksiä riippuen onko backend paikallisella koneella vai Herokuussa
+controllers/havaintoasemacontroller.js tiedostossa rivillä 72. Määritä tämä kommenttiin, jos käytetään Herokuta
+
+```
+let tunti = aika1.getHours() - 3; // Ottaa tämä pois, kun siirtää Herokuuhun. Muuten ei toimi UTC aika. Haetaan ajasta tunti-tieto.
+```
+
+controllers/havaintoasemacontroller.js tiedostossa rivillä 248. Määritä tämä kommenttiin, jos käytetään Herokuta
+```
+let tunti = aika1.getHours() - 3; // Laita tämä kommenttiin, jos Herokuussa. Muuten ei toimi UTC aika
+```
+
 ## Reflektio ja ajankäyttö
 
 Miten työ onnistui? Mikä oli helppoa, mikä vaikeaa? Kuinka paljon käytit aikaa loppuharjoitustyön tekemiseen? Mitä tietoja/taitoja sinun tulee vielä kehittää?
 
 Toistaiseksi työ on onnistunut hyvin. Vaikeinta on ollut aikatietojen muokkaaminen ja parserointi (UTC-aika).
-Aikaa on käytetty backendiin ainakin 30-40 h ja frontendiin xxx h.
+Aikaa on käytetty backendiin ainakin 50-60 h ja frontendiin xxx h.
 
 ## Työssä hyödynnetyt tutoriaalit
 
 Kustakin tutoriaalista ilmoitetaan sen nimi ja osoite.
 Kunkin tutorialain osalta kirjataan tieto kuinka paljon kyseistä tutoriaalia on hyödynnetty ja kuinka paljon omaa koodia on tuotettu tutoriaalin lisäksi.
 
-Tour of Heroes https://angular.io/tutorial frontendissä.
+Tour of Heroes https://angular.io/tutorial frontendissä ja backendissä. Käytetty backendissä miten tehdään reitit ja tietojen muutoksia.
 Backendissä on käytetty lähinnä Web-kehittäjä koulutuksen materiaaleja sekä ajan parseroimiseen ja muotoiluun on käytetty joitakin ohjeita StackOverFlow:sta.
+Koulutuksessa tunnilla käydyllä Node.js -kurssilla olleita materiaaleja käytetty hyödyksi kirjautumisessa, reittien ja controllerien teossa.
+Backendissä ei ole käytetty suoraan muita tutoeriaaleja vaan pieniä palasia otettua sieltä sun täältä eri nettisivustoilta.
 
 ### Sekalaiset
 

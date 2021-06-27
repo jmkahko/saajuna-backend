@@ -9,7 +9,7 @@ https://www.digitraffic.fi/rautatieliikenne/#avoimen-datan-k%C3%A4ytt%C3%B6lupa
 
 Rata.digitraffic.fi -rajapinnan tietojen käyttö verkkosivulla tai sovelluksessa. Sivulle tai sovellukseen lisätään seuraava teksti linkkeineen:
 
-Liikennetietojen lähde Fintraffic / digitraffic.fi, lisenssi CC 4.0 BY
+Liikennetietojen lähde [Fintraffic](https://www.fintraffic.fi/fi) / [digitraffic.fi](https://www.digitraffic.fi/), lisenssi [CC 4.0 BY](https://creativecommons.org/licenses/by/4.0/)
 
 Nimeämistietojen merkintätavoista löytyy tarkempia ohjeita Creative Commonsin verkkosivuilta.
 

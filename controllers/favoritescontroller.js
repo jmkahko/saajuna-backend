@@ -37,6 +37,7 @@ const FavoritesController = {
     });
   },
 
+  // Lisätään käyttäjän suosikit. Käytetään samaa username kuin käyttäjän rekisteröinnissä
   lisaaKayttajanSuosikit: (req, res) => {
 
     Favorites.create(
@@ -47,7 +48,8 @@ const FavoritesController = {
         favoritesJuna1: req.body.favoritesJuna1,
         favoritesJuna2: req.body.favoritesJuna2
       },
-      (err, favorites) => {
+      // Virhe käsittelyä
+      (err) => {
         if (err) {
           return res.status(500).send('Suosikkien lisäykset epäonnistui');
         } else {
@@ -60,6 +62,7 @@ const FavoritesController = {
     )
   },
 
+  // Poistetaan halutun tunnuksen tiedot
   poistaTunnus: (req, res) => {
     // deleteOne argumentit: {hakukriteeri (req.params.id saa request sanomassa tiedon)} eli _id:tä
     // vastaava id saadaan clientilta, (callback jolla suoritetaan varsinainen haku)

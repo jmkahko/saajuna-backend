@@ -5,10 +5,9 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 // Tietokanta yhteys ja ENV tiedosto määrittely
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'); // MongoDB tietokanta
 require('dotenv').config(); //dotenv -moduuli tarvitaan jos aiotaan käyttää .env -filua
 const cors = require('cors'); // Corssin käyttöönotto
-
 
 // Reitit
 const indexRouter = require('./routes/index');
