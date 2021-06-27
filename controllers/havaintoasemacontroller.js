@@ -1,11 +1,11 @@
-const Havaintoasema = require('../models/Havaintoasema');
-const Saanyt = require('../models/Saanyt');
-const Saaennuste = require('../models/Saaennuste');
+const Havaintoasema = require('../models/Havaintoasema'); //havaintoaseman mallli
+const Saanyt = require('../models/Saanyt'); //tämän hetkisen sää malli
+const Saaennuste = require('../models/Saaennuste'); // sääennusteen malli
 const https = require('https'); // XML-parserointiin säätiedosta
 const xml2js = require('xml2js'); // XML-parserointiin säätiedosta
 const parser = new xml2js.Parser(); // XML-parserointiin säätiedosta
 
-// Asema modelin tuonti
+// Havaintoaseman modelin tuonti
 const HavaintoAsemaController = {
   // Haetaan kaikki havaintoasemat
   haeKaikki: (req, res) => {
@@ -14,7 +14,7 @@ const HavaintoAsemaController = {
         throw error;
       }
 
-      res.json(havaintoasemat);
+      res.json(havaintoasemat); // Lähetetään JSONina tietokannasta saatu tieto eteenpäin
     });
   },
 
@@ -32,7 +32,7 @@ const HavaintoAsemaController = {
     );
   },
 
-  // Haetaan tietty havaintoasema ID:llä
+  // Haetaan tietty havaintoasema aseman ID:llä
   haeAsemaIDlla: (req, res) => {
     Havaintoasema.findOne({ _id: req.params.id }, (error, havaintoasema) => {
       // Jos tulee virhe niin lähetetään virhesanoma
@@ -43,13 +43,13 @@ const HavaintoAsemaController = {
     });
   },
 
-  // Hae havaintoaseman säätieto. Päivittyy 10 minuutin välein
+  // Haetaan havaintoaseman säätieto. Säätieto päivittyy 10 minuutin välein.
   haeHavaintoasemanSaa: (req, response) => {
     const fmisid = req.params.fmisid; // Saadaan päivätieto
 
-    // Haetaan viimeisestä tallennuksesta kellonaika milloin havainto on tehty
+    // Haetaan viimeisestä tallennuksesta kellonaika, milloin havainto on tehty
     Saanyt.findOne(
-      { fmisid: req.params.fmisid },
+      { fmisid: req.params.fmisid }, //haetaan havaintoaseman fmisid-tunnuksella
       { _id: false, time: true },
       (error, kellonaika) => {
         // Jos tulee virhe niin lähetetään virhesanoma
@@ -64,11 +64,11 @@ const HavaintoAsemaController = {
         // Ajan muunnoksia (vuosi, kuukausi, päivä, tunti ja minuutti). Sekunnit ja millisekunnit jätetään pois.
         // FMI käyttää päivämäärä-tiedossaan UTC-aikaa, joten esimerkiksi tunneista pitää vähentää 3, jotta saadaan
         // haku tapahtumaan oikeana aikana.
-        let vuosi = aika1.getFullYear();
-        let kuukausi = aika1.getMonth() + 1;
-        let paiva = aika1.getDate();
-        let tunti = aika1.getHours() - 3; // Ottaa tämä pois, kun siirtää Herokuuhun. Muuten ei toimi UTC aika
-        let minuutti = aika1.getMinutes();
+        let vuosi = aika1.getFullYear(); //Haetaan ajasta vuosi-tieto.
+        let kuukausi = aika1.getMonth() + 1; //Haetaan ajasta kuukausi-tieto.
+        let paiva = aika1.getDate(); //Haetaan ajasta päivätieto
+        let tunti = aika1.getHours() - 3; // Ottaa tämä pois, kun siirtää Herokuuhun. Muuten ei toimi UTC aika. Haetaan ajasta tunti-tieto.
+        let minuutti = aika1.getMinutes(); //Haetaan ajasta minuutti-tieto.
         // Pyöristetään minuutit alaspäin tasakymmenminuuteiksi, koska tieto haetaan fmi:n tietokannasta esim. 13.10, 13.20, 13.30
         minuutti = Math.floor(minuutti / 10) * 10;
 
@@ -90,13 +90,13 @@ const HavaintoAsemaController = {
           minuutti = '0' + minuutti;
         }
 
-        // Muodostetaan aika hakua varten määrämuotoisena
+        // Muodostetaan aika hakua varten UTC-määrämuotoisena
         const aika =
           vuosi + '-' + kuukausi + '-' + paiva + 'T' + tunti + ':' + minuutti;
 
-        console.log('Aika ennen muutosta ' + aika);
+        console.log('Aika ennen muutosta ' + aika); //tarvitaanko?
 
-        console.log('Aika muutoksen jälkeen ' + aika);
+        console.log('Aika muutoksen jälkeen ' + aika); //tarvitaanko?
         // Lasketaan erotus millisekunteina
         let erotus =
           new Date(kellonaika.time).getTime() - new Date(aika).getTime();
@@ -117,18 +117,20 @@ const HavaintoAsemaController = {
             response.json(saatieto); // Lähetetään JSONina tietokannasta saatu tieto eteenpäin
           }).sort({ _id: -1 });
         } else {
-          // Viimeisimmästä säätiedon hausta on yli 10 minuuttia aikaa. Haetaan säätieto ja tallennetaan tietokantaan
+          // Kun viimeisimmästä säätiedon hausta on yli 10 minuuttia aikaa, haetaan säätieto ja tallennetaan se tietokantaan.
+          // Muodostetaan hakulinkki, jolla haetaan sää-tiedot Ilmatieteenlaitoksen avoimesta datasta. Linkkiin määritellään hakuaika ja havaintoaseman fmisid-tieto.
           const url =
             'https://opendata.fmi.fi/wfs?request=getFeature&storedquery_id=fmi::observations::weather::simple&starttime=' +
             aika +
             '&fmisid=' +
             fmisid;
 
-          console.log(url);
+          console.log(url); //tarvitaanko?
           parser.on('error', function (err) {
+            //parserointia?
             console.log('Parser error', err);
           });
-          // Luodaan taulukko, johon data haetaan
+          // Luodaan taulukko, johon säädata haetaan
           let data = '';
           let taulukko = [];
           https.get(url, function (res) {
@@ -149,7 +151,7 @@ const HavaintoAsemaController = {
                       ][0]['BsWfs:Time'].join(),
                     ]);
 
-                    // Lisätään mittaus arvot taulukkoon
+                    // Lisätään mittausarvot taulukkoon
                     for (let x = 0; x <= 12; x++) {
                       // Haetaan parametrin nimi
                       let parametrinimi =
@@ -157,13 +159,13 @@ const HavaintoAsemaController = {
                           'BsWfs:BsWfsElement'
                         ][0]['BsWfs:ParameterName'].join();
 
-                      // Haetaan mittaus tulos
+                      // Haetaan mittaustulos
                       let parametritulos =
                         result['wfs:FeatureCollection']['wfs:member'][x][
                           'BsWfs:BsWfsElement'
                         ][0]['BsWfs:ParameterValue'].join();
 
-                      // Muutetetaan saatu NaN tulos null arvoon, joka tallennetaan tietokantaan.
+                      // Muutetetaan saatu NaN tulos null arvoiseksi ja se tallennetaan tietokantaan.
                       if (parametritulos === 'NaN') {
                         taulukko.push([parametrinimi, null]);
                       } else {
@@ -171,7 +173,7 @@ const HavaintoAsemaController = {
                       }
                     }
 
-                    // Lisätään fmisid numero taulukkoon
+                    // Lisätään säähavaintoaseman id eli fmisid-numero taulukkoon
                     taulukko.push(['fmisid', Number(fmisid)]);
 
                     // Muutetaan taulukko objectiksi
@@ -219,7 +221,7 @@ const HavaintoAsemaController = {
     ).sort({ _id: -1 });
   },
 
-  // Hae paikkakunnan sääennuste. Saadaan tunnin välein
+  // Hae paikkakunnan sääennuste. Säätieto saadaan tunnin välein.
   haeAsemaSaaEnnustePlace: (req, response) => {
     const place = req.params.place; // Saadaan paikkakunta
 
@@ -284,8 +286,8 @@ const HavaintoAsemaController = {
             }
           ).sort({ _id: -1 });
         } else {
-          // Viimeisimmästä säätiedon hausta on yli 10 minuuttia aikaa. Haetaan säätieto ja tallennetaan tietokantaan
-
+          //  Jos viimeisimmästä säätiedon hausta on yli 10 minuuttia aikaa, haetaan säätieto ja tallennetaan tietokantaan.
+          // muodostetaan hakua varten url-linkki. Linkkiin määritellään hakuaika ja paikka.
           const url =
             'https://opendata.fmi.fi/wfs?request=getFeature&storedquery_id=fmi::forecast::hirlam::surface::point::simple&starttime=' +
             aika +
@@ -321,7 +323,7 @@ const HavaintoAsemaController = {
                       ][0]['BsWfs:Time'].join(),
                     ]);
 
-                    // Lisätään mittaus arvot taulukkoon
+                    // Lisätään mittausarvot taulukkoon
                     for (let x = 0; x <= 23; x++) {
                       // Haetaan parametrin nimi
                       let parametrinimi =
@@ -329,13 +331,13 @@ const HavaintoAsemaController = {
                           'BsWfs:BsWfsElement'
                         ][0]['BsWfs:ParameterName'].join();
 
-                      // Haetaan mittaus tulos
+                      // Haetaan mittaustulos
                       let parametritulos =
                         result['wfs:FeatureCollection']['wfs:member'][x][
                           'BsWfs:BsWfsElement'
                         ][0]['BsWfs:ParameterValue'].join();
 
-                      // Muutetetaan saatu NaN tulos null arvoon, joka tallennetaan tietokantaan.
+                      // Muutetetaan saatu NaN tulos null-arvoon ja se tallennetaan tietokantaan.
                       if (parametritulos === 'NaN') {
                         taulukko.push([parametrinimi, null]);
                       } else {
@@ -392,7 +394,7 @@ const HavaintoAsemaController = {
     ).sort({ _id: -1 });
   },
 
-  // Hae paikkakunnan sääennuste koordinaateilla. Saadaan tunnin välein Ilmatieteenlaitokselta.
+  // Hae paikkakunnan sääennuste koordinaateilla. Sääennuste saadaan tunnin välein Ilmatieteenlaitokselta.
   haeAsemaSaaEnnuste: (req, response) => {
     const latlon = req.params.latlon; // Saadaan leveysasteen koordinaatit
 
@@ -428,6 +430,7 @@ const HavaintoAsemaController = {
     // Tulostetaan kuluva aika, tietokantaan tallennettu viimeisin, paljonko erotus ajoissa
     console.log(aika1);
 
+    // luodaan url linkki hakua varten. Linkkiin määritellään hakuaika ja koordinaatit.
     const url =
       //'http://opendata.fmi.fi/wfs?service=WFS&version=2.0.0&request=getFeature&storedquery_id=fmi::forecast::hirlam::surface::point::timevaluepair&place=jaala&latlon=60.1,19.9&'
       'https://opendata.fmi.fi/wfs?request=getFeature&storedquery_id=fmi::forecast::hirlam::surface::point::simple&starttime=' +
