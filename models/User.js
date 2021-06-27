@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
-  username: { type: String, required: true, unique: true }, // String muotoinen, pakko olla ja ei voi olla useampaa samaa
-  password: { type: String, required: true }, // Salasana string muotoinen ja pakko olla
-  isadmin: { type: Boolean, required: true }, // Onko admin vai ei tieto
-})
+  username: { type: String, required: true, unique: true }, // Käyttäjätunnus on string muotoinen ja se on pakko olla ja niitä ei voi olla useampaa samanlaista.
+  password: { type: String, required: true }, // Salasana on myös string muotoinen ja se on pakko olla.
+  isadmin: { type: Boolean, required: true }, // Onko käyttäjä admin vai ei
+});
 
 // Tehdään skeemasta model
 const User = mongoose.model('user', UserSchema);
