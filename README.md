@@ -55,4 +55,7 @@ MONGOD_URL="TÄHÄNSALAINENLINKKI"
 
 # verifonetoken JWT-token palvelimelta
 SECRET = "SALAINENSALASANA"
+
+# Cors frontendiin esim. paikallisesti käytetty osoite
+FRONTEND_URL = 'http://localhost:4200'
 ```

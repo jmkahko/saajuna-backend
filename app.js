@@ -22,7 +22,7 @@ const app = express();
 
 // cors avaa yhteyden palvelinsovelluksen ja asiakassovelluksen välille, jos nämä sijaitsevat eri palvelimilla
 const corsOptions = {
-  origin: 'http://localhost:4200', // Frontendin osoite mihin saadaan ollaa yhteydessä
+  origin: process.env.FRONTEND_URL,
   optionsSuccessStatus: 200,
 };
 
