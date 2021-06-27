@@ -12,8 +12,8 @@ const SaanytSchema = new mongoose.Schema({
   td: { type: Number }, // Kastepiste
   r_1h: { type: Number }, // Sademäärä tunnissa
   ri_10min: { type: Number }, // Sateen rankkuus
-  snow_aws: { type: Number }, // Lumensyvyys
-  p_sea: { type: Number }, // Paine
+  snow_aws: { type: Number }, // Lumen syvyys
+  p_sea: { type: Number }, // Ilman paine
   vis: { type: Number }, // Näkyvyys
   n_man: { type: Number }, // Pilvisyys
   wawa: { type: Number }, // Säätila
