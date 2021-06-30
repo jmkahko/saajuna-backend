@@ -40,6 +40,7 @@ const JunaController = {
         // Jos tulee muu kuin 200 vastaus viestissä, niin tulostetaan koodi ja virhe viesti
         console.log('Statuskoodi: ' + response.statusCode);
         console.log('Virhe: ' + error);
+        res.status(response.statusCode).send([]); // Lähetetään statuskoodi ja tyhjä taulukko
       }
     });
   },
@@ -151,6 +152,7 @@ const JunaController = {
             // Jos tulee muu kuin 200 vastaus viestissä, niin tulostetaan koodi ja virhe viesti
             console.log('Statuskoodi: ' + response.statusCode);
             console.log('Virhe: ' + error);
+            res.status(response.statusCode).send([]); // Lähetetään statuskoodi ja tyhjä taulukko
           }
         });
       });

@@ -9,5 +9,3 @@ router.get('/paikkatieto/:timestamp/:trainNumber/', JunaController.haePaikkatiet
 router.get('/aikataulu/:timestamp/:trainNumber/', JunaController.haeAikataulu);
 
 module.exports = router;
-
-
