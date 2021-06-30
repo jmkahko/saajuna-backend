@@ -17,21 +17,21 @@ const HavaintoAsemaController = {
       res.json(havaintoasemat); // Lähetetään JSONina tietokannasta saatu tieto eteenpäin
     });
   },
-
+  //  EI TARVITA
   // Haetaan tietty havaintoasema nimellä
-  haeAsemaNimella: (req, res) => {
-    Havaintoasema.findOne(
-      { fmisid: req.params.fmisid },
-      (error, havaintoasema) => {
-        // Jos tulee virhe niin lähetetään virhesanoma
-        if (error) {
-          console.log(error); //tulostetaan saatu virhe
-          res.json(error); //lähetetään saatu virhe JSONina
-        }
-        res.json(havaintoasema); // Lähetetään JSONina tietokannasta saatu tieto eteenpäin
-      }
-    );
-  },
+  // haeAsemaNimella: (req, res) => {
+  //   Havaintoasema.findOne(
+  //     { fmisid: req.params.fmisid },
+  //     (error, havaintoasema) => {
+  //       // Jos tulee virhe niin lähetetään virhesanoma
+  //       if (error) {
+  //         console.log(error); //tulostetaan saatu virhe
+  //         res.json(error); //lähetetään saatu virhe JSONina
+  //       }
+  //       res.json(havaintoasema); // Lähetetään JSONina tietokannasta saatu tieto eteenpäin
+  //     }
+  //   );
+  // },
 
   // Haetaan tietty havaintoasema aseman ID:llä
   haeAsemaIDlla: (req, res) => {
