@@ -50,7 +50,8 @@ const JunaController = {
 
       Asema.find((error, asemat) => {
         if (error) {
-          throw error;
+          console.log(error); // Lähetetään virhe myös konsoliin
+          res.json(error); // Palautetaan virhe JSON muodossa
         }
   
         const paiva = req.params.timestamp; // Saadaan päivätieto

@@ -7,7 +7,8 @@ const AsemaController = {
   haeKaikki: (req, res) => {
     Asema.find((error, asemat) => {
       if (error) {
-        throw error;
+        console.log(error); // Lähetetään virhe myös konsoliin
+        res.json(error); // Palautetaan virhe JSON muodossa
       }
 
       res.json(asemat);
@@ -17,9 +18,10 @@ const AsemaController = {
   // Haetaan asema id:llä
   haeIdlla: (req, res) => {
     Asema.findOne({ _id: req.params.id }, (error, asemat) => {
-      // Jos tulee virhe niin lähetetään virhesanoma
+      // Jos tulee virhe niin lähetetään virhesanoma JSONina. Muuten backend kaatuu
       if (error) {
-        throw error;
+        console.log(error); // Lähetetään virhe myös konsoliin
+        res.json(error); // Palautetaan virhe JSON muodossa
       }
       res.json(asemat); // Lähetetään JSONina tietokannasta saatu tieto eteenpäin
     });
@@ -32,7 +34,8 @@ const AsemaController = {
       (error, asemat) => {
         // Jos tulee virhe niin lähetetään virhesanoma
         if (error) {
-          throw error;
+          console.log(error); // Lähetetään virhe myös konsoliin
+          res.json(error); // Palautetaan virhe JSON muodossa
         }
         res.json(asemat); // Lähetetään JSONina tietokannasta saatu tieto eteenpäin
       }
@@ -70,7 +73,8 @@ const AsemaController = {
           // Tallennetaan rautatieasema
           UusiAsema.save((error, result) => {
             if (error) {
-              throw error;
+              console.log(error); // Lähetetään virhe myös konsoliin
+              res.json(error); // Palautetaan virhe JSON muodossa
             }
           });
           asemia++; // Lisätään asema muuttujaan yksi joka tallennuksella
@@ -91,7 +95,8 @@ const AsemaController = {
     Asema.deleteMany({}, (error, result) => {
       // Jos tulee virhe niin lähetetään virhesanoma
       if (error) {
-        throw error;
+        console.log(error); // Lähetetään virhe myös konsoliin
+        res.json(error); // Palautetaan virhe JSON muodossa
       }
       res.json({ 'Asemat poistettu': result });  // Lähetetään JSONina tietokannasta saatu tieto eteenpäin
     });
@@ -104,7 +109,8 @@ const AsemaController = {
     Asema.find((error, asemat) => {
       // Jos tulee virhe niin lähetetään virhesanoma
       if (error) {
-        throw error;
+        console.log(error); // Lähetetään virhe myös konsoliin
+        res.json(error); // Palautetaan virhe JSON muodossa
       }
         
       const station = req.params.station; // Rautatieaseman lyhytkoodi
