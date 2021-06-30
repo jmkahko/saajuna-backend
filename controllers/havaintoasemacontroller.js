@@ -7,12 +7,12 @@ const parser = new xml2js.Parser(); // XML-parserointiin säätiedosta
 
 // Havaintoaseman modelin tuonti
 const HavaintoAsemaController = {
-
   // Haetaan kaikki havaintoasemat
   haeKaikki: (req, res) => {
     Havaintoasema.find((error, havaintoasemat) => {
       if (error) {
-        throw error;
+        console.log(error); //tulostetaan saatu virhe
+        res.json(error); //lähetetään saatu virhe JSONina
       }
       res.json(havaintoasemat); // Lähetetään JSONina tietokannasta saatu tieto eteenpäin
     });
@@ -25,7 +25,8 @@ const HavaintoAsemaController = {
       (error, havaintoasema) => {
         // Jos tulee virhe niin lähetetään virhesanoma
         if (error) {
-          throw error;
+          console.log(error); //tulostetaan saatu virhe
+          res.json(error); //lähetetään saatu virhe JSONina
         }
         res.json(havaintoasema); // Lähetetään JSONina tietokannasta saatu tieto eteenpäin
       }
@@ -37,7 +38,8 @@ const HavaintoAsemaController = {
     Havaintoasema.findOne({ _id: req.params.id }, (error, havaintoasema) => {
       // Jos tulee virhe niin lähetetään virhesanoma
       if (error) {
-        throw error;
+        console.log(error); //tulostetaan saatu virhe
+        res.json(error); //lähetetään saatu virhe JSONina
       }
       res.json(havaintoasema); // Lähetetään JSONina tietokannasta saatu tieto eteenpäin
     });
@@ -54,7 +56,8 @@ const HavaintoAsemaController = {
       (error, kellonaika) => {
         // Jos tulee virhe niin lähetetään virhesanoma
         if (error) {
-          throw error;
+          console.log(error); //tulostetaan saatu virhe
+          response.json(error); //lähetetään saatu virhe JSONina
         }
 
         // Haetaan päivämäärä ja kellonaika
@@ -98,13 +101,20 @@ const HavaintoAsemaController = {
         const aika =
           vuosi + '-' + kuukausi + '-' + paiva + 'T' + tunti + ':' + minuutti;
 
-        // Tulostetaan konsoliin ajat  
+        // Tulostetaan konsoliin ajat
         //console.log('Aika ennen muutosta ' + aika);
         //console.log('Aika muutoksen jälkeen ' + aika);
 
         // Lasketaan erotus millisekunteina
-        let erotus =
-          new Date(kellonaika.time).getTime() - new Date(aika).getTime();
+        let erotus;
+        if (!error) {
+          //jos ajanhaussa ei tule virhettä, lasketaan erotus normaalisti
+          erotus =
+            new Date(kellonaika.time).getTime() - new Date(aika).getTime();
+        } else {
+          console.log(error); // jos ajanhaussa tulee virhe, tulostetaan virhe.
+        }
+
         let erotusminuuttia = erotus / 60000;
 
         // Tulostetaan kuluva aika, tietokantaan tallennettu viimeisin, paljonko erotus ajoissa
@@ -118,7 +128,8 @@ const HavaintoAsemaController = {
           Saanyt.findOne({ fmisid: req.params.fmisid }, (error, saatieto) => {
             // Jos tulee virhe niin lähetetään virhesanoma
             if (error) {
-              throw error;
+              console.log(error); //tulostetaan saatu virhe
+              res.json(error); //lähetetään saatu virhe JSONina
             }
             response.json(saatieto); // Lähetetään JSONina tietokannasta saatu tieto eteenpäin
           }).sort({ _id: -1 });
@@ -195,7 +206,8 @@ const HavaintoAsemaController = {
 
                     newSaa.save(function (err) {
                       if (err) {
-                        throw err;
+                        console.log(err); //tulostetaan saatu virhe
+                        res.json(err); //lähetetään saatu virhe JSONina
                       }
                       console.log('Sää tallennettu.');
                     });
@@ -214,7 +226,8 @@ const HavaintoAsemaController = {
                         (error, saatieto) => {
                           // Jos tulee virhe niin lähetetään virhesanoma
                           if (error) {
-                            throw error;
+                            console.log(error); //tulostetaan saatu virhe
+                            res.json(error); //lähetetään saatu virhe JSONina
                           }
                           response.json(saatieto); // Lähetetään JSONina tietokannasta saatu tieto eteenpäin
                         }
@@ -291,7 +304,6 @@ const HavaintoAsemaController = {
         res.on('end', function () {
           // Parseroidaan saatu tulos result muuttujaan
           parser.parseString(data, function (err, result) {
-
             // Tehdään try catch menettelyllä tietojen tallennus. Jos XML on tyhjä, niin ohjelman suoritus ei lakkaa kokonaan.
             try {
               taulukko.push([
@@ -300,7 +312,7 @@ const HavaintoAsemaController = {
                   'BsWfs:BsWfsElement'
                 ][0]['BsWfs:Time'].join(),
               ]);
-  
+
               // Lisätään mittaus arvot taulukkoon
               for (let x = 0; x <= 23; x++) {
                 // Haetaan parametrin nimi
@@ -308,13 +320,13 @@ const HavaintoAsemaController = {
                   result['wfs:FeatureCollection']['wfs:member'][x][
                     'BsWfs:BsWfsElement'
                   ][0]['BsWfs:ParameterName'].join();
-  
+
                 // Haetaan mittaus tulos
                 let parametritulos =
                   result['wfs:FeatureCollection']['wfs:member'][x][
                     'BsWfs:BsWfsElement'
                   ][0]['BsWfs:ParameterValue'].join();
-  
+
                 // Muutetetaan saatu NaN tulos null arvoon, joka tallennetaan tietokantaan.
                 if (parametritulos === 'NaN') {
                   taulukko.push([parametrinimi, null]);
@@ -322,26 +334,25 @@ const HavaintoAsemaController = {
                   taulukko.push([parametrinimi, Number(parametritulos)]);
                 }
               }
-  
+
               // Lisätään koordinaatit taulukkoon
               taulukko.push(['latlon', latlon]);
-  
+
               // Muutetaan taulukko objectiksi
               const arrayToObject = Object.fromEntries(new Map(taulukko));
-  
+
               // Tulostetaan saatu tulos
               console.log(arrayToObject);
-  
+
               // Tallennetaan saatu tulos tietokantaan
               const newSaaEnnuste = Saaennuste(arrayToObject);
-  
+
               response.json(newSaaEnnuste);
             } catch (e) {
               // Jos tuli virhe tulostetaan virhe
               console.log('Tietojen haku epäonnistui');
               console.error(e.message);
             } finally {
-
             }
           });
         });
