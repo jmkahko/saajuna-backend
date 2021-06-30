@@ -1,4 +1,4 @@
-# Jyväskylän ammattikorkeakoulun Web-kehittäjä kurssin lopputyön Sää Juna backend
+# JAMK Web-kehittäjä kurssin lopputyön SääJuna backend
 
 Projektin frontend https://github.com/jmkahko/saajuna-frontend
 
@@ -48,7 +48,12 @@ controllers/havaintoasemacontroller.js tiedostossa rivillä XXXXXXXX. Määritä
 let tunti = aika1.getHours() - 3; // Ottaa tämä pois, kun siirtää Herokuuhun. Muuten ei toimi UTC aika. Haetaan ajasta tunti-tieto.
 ```
 
+<<<<<<< HEAD
 controllers/havaintoasemacontroller.js tiedostossa rivillä XXXXXXX. Määritä tämä kommenttiin, jos käytetään Herokuta
+=======
+controllers/havaintoasemacontroller.js tiedostossa rivillä 248. Määritä tämä kommenttiin, jos käytetään Herokuta
+
+>>>>>>> 9f982ee22031d18aa1eaf55d0c47d0ecf23cfbad
 ```
 let tunti = aika1.getHours() - 3; // Laita tämä kommenttiin, jos Herokuussa. Muuten ei toimi UTC aika
 ```
