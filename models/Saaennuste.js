@@ -9,8 +9,8 @@ const SaaennusteSchema = new mongoose.Schema({
   Temperature: { type: Number }, //Lämpötila
   Pressure: { type: Number },
   Humidity: { type: Number },
-  WindDirection: { type: Number },
-  WindSpeedMS: { type: Number },
+  WindDirection: { type: Number }, //Tuulen suunta
+  WindSpeedMS: { type: Number }, //Tuulen nopeus
   WindUMS: { type: Number },
   WindVMS: { type: Number },
   MaximumWind: { type: Number },
