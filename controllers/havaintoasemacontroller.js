@@ -72,7 +72,7 @@ const HavaintoAsemaController = {
         let paiva = aika1.getDate(); //Haetaan ajasta päivätieto
 
         // Heroku / paikallisesti ajettava
-        let tunti = aika1.getHours(); // - 3; // Ottaa tämä -3 arvo, kun siirtää Herokuuhun. Muuten ei toimi UTC aika. Haetaan ajasta tunti-tieto.
+        let tunti = aika1.getHours() - 3; // Ottaa tämä -3 arvo pois, kun siirtää Herokuuhun. Muuten ei toimi UTC aika. Haetaan ajasta tunti-tieto.
 
         let minuutti = aika1.getMinutes(); //Haetaan ajasta minuutti-tieto.
 
@@ -258,7 +258,7 @@ const HavaintoAsemaController = {
     let paiva = aika1.getDate();
 
     // Jos laitetaan Herokuhun laitetaan tämä rivi kommenttiin
-    let tunti = aika1.getHours(); // - 3; // Laittaa -3 arvo kommenttiin, jos Herokuussa. Muuten ei toimi UTC aika
+    let tunti = aika1.getHours() - 3; // Laittaa -3 arvo kommenttiin, jos Herokuussa. Muuten ei toimi UTC aika
 
     // Lisätään kuukausiin, päiviin, tunteihin ja minuutteihin 0 eteen mikäli ne ovat pienempiä kuin 10.
     // Tällöin saadaan päivämäärätiedot oikeiksi ja määrämuotoisiksi hakua varten.

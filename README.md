@@ -46,13 +46,13 @@ FRONTEND_URL = 'http://localhost:4200'
    controllers/havaintoasemacontroller.js tiedostossa rivillä 75. Määritä tämä kommentiksi, jos käytetään Herokuta.
 
 ```
-let tunti = aika1.getHours() - 3; // Ota tämä pois, kun siirretään Herokuhun, koska muuten ei toimi UTC-aika.
+let tunti = aika1.getHours() - 3; // Ota tämä -3 arvo pois, kun siirretään Herokuhun, koska muuten ei toimi UTC-aika.
 ```
 
 controllers/havaintoasemacontroller.js tiedostossa rivillä 261. Määritä tämä kommentiksi, jos käytetään Herokuta.
 
 ```
-let tunti = aika1.getHours() - 3; // Ota tämä pois, kun siirretään Herokuhun, koska muuten ei toimi UTC-aika.
+let tunti = aika1.getHours() - 3; // Ota tämä -3 arvo pois, kun siirretään Herokuhun, koska muuten ei toimi UTC-aika.
 ```
 
 6. Tämän jälkeen käynnistä projekti `npm start` komennolla.
