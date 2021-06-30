@@ -8,9 +8,6 @@ router.get('/', havaintoasemacontroller.haeKaikki);
 // Haetaan tietty säähavaintoasema id:llä
 router.get('/:id', havaintoasemacontroller.haeAsemaIDlla);
 
-// Haetaan tietty säähavaintoasema havaintoaseman fmisid-numerolla
-router.get('/:fmisid', havaintoasemacontroller.haeAsemaNimella);
-
 // Haetaan tietyn säähavaintoaseman säätiedot 10 minuuttia
 router.get('/saanyt/:fmisid', havaintoasemacontroller.haeHavaintoasemanSaa);
 
