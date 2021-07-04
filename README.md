@@ -57,7 +57,6 @@ let tunti = aika1.getHours() - 3; // Ota tämä -3 arvo pois, kun siirretään H
 
 6. Käy luomassa admin käyttäjätunnus tietokantaan esim. Postmanilla
   Lähetetään alla oleva JSON-sanoma POST-komennolla linkkiin localhost:3000/users/register
-  Ota saamasi token tunnus taltteen, tarvitset sitä myöhemmin.
 
 ```
 {
@@ -80,6 +79,7 @@ let tunti = aika1.getHours() - 3; // Ota tämä -3 arvo pois, kun siirretään H
 
 12. Sisään kirjautuminen
   Lähetetään alla oleva JSON-sanoma POST-komennolla linkkiin localhost:3000/users/login
+  Ota saamasi token tunnus taltteen, tarvitset sitä myöhemmin.
   ```
   {
     "username" : "kohdassa 6. tekemä tunnus",
