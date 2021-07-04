@@ -20,13 +20,13 @@ const favoritesRouter = require('./routes/favorites');
 const app = express();
 
 // cors avaa yhteyden palvelinsovelluksen ja asiakassovelluksen välille, jos nämä sijaitsevat eri palvelimilla
-/*const corsOptions = {
+const corsOptions = {
   origin: process.env.FRONTEND_URL,
   optionsSuccessStatus: 200,
 };
-*/
+
 // Otetaan cors käyttöön apppiin
-//app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 
 // Tietokanta yhteyden muodostus
 mongoose.set('useUnifiedTopology', true); // määritys jota käytetään tietokantapalvelimen etsinnässä
