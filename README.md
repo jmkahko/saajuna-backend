@@ -56,7 +56,41 @@ controllers/havaintoasemacontroller.js tiedostossa rivillä 261. Määritä täm
 let tunti = aika1.getHours() - 3; // Ota tämä -3 arvo pois, kun siirretään Herokuhun, koska muuten ei toimi UTC-aika.
 ```
 
-6. Tämän jälkeen käynnistä projekti `npm start` komennolla.
+6. Käy luomassa admin käyttäjätunnus tietokantaan esim. Postmanilla
+  Lähetetään alla oleva JSON-sanoma POST-komennolla linkkiin localhost:3000/users/register
+
+```
+{
+    "username" : "admin",
+    "password" : "Tähän admin tunnuksen salainen salasanasi", 
+    "isadmin" : true
+}
+```
+  
+7. Säähavaintoasemien ja säänyt-datan aloitustietojen lataus MongoDB tietokantaan https://github.com/jmkahko/saajuna-backend/tree/main/Aloitusdata
+
+8. Tämän jälkeen käynnistä projekti `npm start` komennolla.
+
+9. Rautatieasemien lataus. Tee kohdan 10. tai kohtien 11., 12. ja 13. mukaan
+
+10. Jos [SääJuna frontend ladattu ja käytössä](https://github.com/jmkahko/saajuna-frontend)
+  Kirjaudu admin-tunnuksella sisään ja mene Omat tiedot-sivulle, sieltä Asematietojen ylläpito kohdasta Lisää asemat. 
+
+11. Muuten lataus Postmanilla
+
+12. Sisään kirjautuminen
+  Lähetetään alla oleva JSON-sanoma POST-komennolla linkkiin localhost:3000/users/login
+  Ota saamasi token tunnus taltteen, tarvitset sitä myöhemmin.
+  ```
+  {
+    "username" : "kohdassa 6. tekemä tunnus",
+    "password" : "kohdassa 6. tekemä salasana"
+  }
+  ```
+
+13. Lisää Headers kohtaan x-access-token ja sille kohdassa 12. saamasi token
+  Lähetetään GET-pyyntö linkkiin localhost:3000/asemat/lisaaasemat
+
 
 ## Reflektio ja ajankäyttö
 
