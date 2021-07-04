@@ -71,7 +71,7 @@ let tunti = aika1.getHours() - 3; // Ota tämä -3 arvo pois, kun siirretään H
 
 8. Tämän jälkeen käynnistä projekti `npm start` komennolla.
 
-9. Rautatieasemien lataus. Tee kohdan 10. tai kohtien 11, 12 ja 13 mukaan
+9. Rautatieasemien lataus. Tee kohdan 10. tai kohtien 11., 12. ja 13. mukaan
 
 10. Jos [SääJuna frontend ladattu ja käytössä](https://github.com/jmkahko/saajuna-frontend)
   Kirjaudu admin-tunnuksella sisään ja mene Omat tiedot-sivulle, sieltä Asematietojen ylläpito kohdasta Lisää asemat. 
@@ -87,7 +87,7 @@ let tunti = aika1.getHours() - 3; // Ota tämä -3 arvo pois, kun siirretään H
   }
   ```
 
-13. Lisää Headers kohtaan x-access-token ja sille kohdassa 9.2.1. saamasi token
+13. Lisää Headers kohtaan x-access-token ja sille kohdassa 12. saamasi token
   Lähetetään GET-pyyntö linkkiin localhost:3000/asemat/lisaaasemat
 
 
