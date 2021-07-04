@@ -10,6 +10,7 @@ require('dotenv').config(); //dotenv -moduuli tarvitaan jos aiotaan käyttää .
 const cors = require('cors'); // Corssin käyttöönotto
 
 // Reitit
+app.options('*', cors()) // include before other routes
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const asematRouter = require('./routes/asemat');
