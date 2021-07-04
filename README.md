@@ -25,11 +25,11 @@ Mutta ne voidaan luoda myös backendiin esimerkiksi Postman-sovelluksen avulla.
 
 ### Komennot
 
-Komennot, joilla kehitysversion saa Githubista toimimaan omalle koneelle.
+Komennot, joilla SääJunan kehitysversion saa Githubista toimimaan omalle koneelle.
 
 1. `git clone git@github.com:jmkahko/saajuna-backend.git`
-2. Tämän jälkeen täytyy rekisteröityä [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) palveluun.
-3. Luodaan projektin juureen .env tiedosto.
+2. Tämän jälkeen tarvitaan rekisteröityminen [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) palveluun.
+3. Luodaan projektin juurihakemistoon .env tiedosto.
 4. Kopioidaan .env-tiedostoon oheinen sisältö:
 
 ```
@@ -43,54 +43,54 @@ SECRET = "SALAINENSALASANA"
 FRONTEND_URL = 'http://localhost:4200'
 ```
 
-5. Lisää määrityksiä riippuen onko backend paikallisella koneella vai Herokussa
-   controllers/havaintoasemacontroller.js tiedostossa rivillä 75. Määritä tämä kommentiksi, jos käytetään Herokuta.
+5. Tässä vielä lisää muutamia määrityksiä riippuen siitä onko backend paikallisella koneella vai Herokussa.
+   Määritä alla oleva tieto kommentiksi controllers/havaintoasemacontroller.js -tiedostossa rivillä 75, jos käytetään Herokuta.
 
 ```
 let tunti = aika1.getHours() - 3; // Ota tämä -3 arvo pois, kun siirretään Herokuhun, koska muuten ei toimi UTC-aika.
 ```
 
-controllers/havaintoasemacontroller.js tiedostossa rivillä 261. Määritä tämä kommentiksi, jos käytetään Herokuta.
+Määritä alla oleva tieto kommentiksi controllers/havaintoasemacontroller.js tiedostossa rivillä 261, jos käytetään Herokuta.
 
 ```
 let tunti = aika1.getHours() - 3; // Ota tämä -3 arvo pois, kun siirretään Herokuhun, koska muuten ei toimi UTC-aika.
 ```
 
-6. Käy luomassa admin käyttäjätunnus tietokantaan esim. Postmanilla
-  Lähetetään alla oleva JSON-sanoma POST-komennolla linkkiin localhost:3000/users/register
+6. Käy luomassa admin-käyttäjätunnus tietokantaan esim. Postmanilla.
+   Lähetetään alla oleva JSON-sanoma POST-komennolla linkkiin localhost:3000/users/register
 
 ```
 {
     "username" : "admin",
-    "password" : "Tähän admin tunnuksen salainen salasanasi", 
+    "password" : "Tähän admin tunnuksen salainen salasanasi",
     "isadmin" : true
 }
 ```
-  
-7. Säähavaintoasemien ja säänyt-datan aloitustietojen lataus MongoDB tietokantaan https://github.com/jmkahko/saajuna-backend/tree/main/Aloitusdata
 
-8. Tämän jälkeen käynnistä projekti `npm start` komennolla.
+7. Tämän jälkeen tarvitaan säähavaintoasemien ja säänyt-datan aloitustietojen lataus MongoDB-tietokantaan https://github.com/jmkahko/saajuna-backend/tree/main/Aloitusdata
 
-9. Rautatieasemien lataus. Tee kohdan 10. tai kohtien 11., 12. ja 13. mukaan
+8. Sitten käynnistä projekti `npm start` komennolla.
+
+9. Rautatieasemien lataus. Tee kohdan 10. tai kohtien 11., 12. ja 13. mukaan.
 
 10. Jos [SääJuna frontend ladattu ja käytössä](https://github.com/jmkahko/saajuna-frontend)
-  Kirjaudu admin-tunnuksella sisään ja mene Omat tiedot-sivulle, sieltä Asematietojen ylläpito kohdasta Lisää asemat. 
+    Kirjaudu admin-tunnuksella sisään ja mene Omat tiedot-sivulle, sieltä Asematietojen ylläpito kohdasta Lisää asemat.
 
-11. Muuten lataus Postmanilla
+11. Muuten tee rautatieasemien lataus Postmanilla.
 
 12. Sisään kirjautuminen
-  Lähetetään alla oleva JSON-sanoma POST-komennolla linkkiin localhost:3000/users/login
-  Ota saamasi token tunnus taltteen, tarvitset sitä myöhemmin.
-  ```
-  {
-    "username" : "kohdassa 6. tekemä tunnus",
-    "password" : "kohdassa 6. tekemä salasana"
-  }
-  ```
+    Lähetetään alla oleva JSON-sanoma POST-komennolla linkkiin localhost:3000/users/login
+    Ota saamasi token tunnus talteen, tarvitset sitä myöhemmin.
 
-13. Lisää Headers kohtaan x-access-token ja sille kohdassa 12. saamasi token
-  Lähetetään GET-pyyntö linkkiin localhost:3000/asemat/lisaaasemat
+```
+{
+  "username" : "kohdassa 6. tekemä tunnus",
+  "password" : "kohdassa 6. tekemä salasana"
+}
+```
 
+13. Lisää Headers kohtaan x-access-token ja sille kohdassa 12. saamasi token.
+    Lähetetään GET-pyyntö linkkiin localhost:3000/asemat/lisaaasemat
 
 ## Reflektio ja ajankäyttö
 
