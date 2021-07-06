@@ -1,16 +1,18 @@
 # Aloitusdata
 
-Säähavaintojen ja -ennusteiden aloitusdata lisätty tietokantaan csv-tiedostoista mongoimport-komennolla, jotta tietokannasta viimeisin haku toimisi oikein.
+Säähavaintojen ja -asemien aloitusdata lisätty tietokantaan csv-tiedostoista mongoimport-komennolla, jotta tietokannasta viimeisin haku toimisi oikein.
 
-## Halutut Ilmatieteenlaitoksen säähavaintoasemat
+## Ilmatieteen laitoksen säähavaintoasemat
 
-Säähavaintoasemien lataus MongoDB-tietokantaan
+Komento säähavaintoasemien lataamiseen MongoDB-tietokantaan.
 
 ```
 mongoimport --uri mongodb+srv://<KÄYTTÄJÄTUNNUS>:<SALASANA>@<MONGO CLUSTER>.doqpu.mongodb.net/<TIETOKANTA> --collection havaintoasemas --type=csv --headerline --file=saaasemat.csv
 ```
 
-## Säähavaintoasemien aloitusdata
+## Säähavaintojen aloitusdata
+
+Komento säähavaintojen lataamiseen MongoDB-tietokantaan.
 
 ```
 mongoimport --uri mongodb+srv://<KÄYTTÄJÄTUNNUS>:<SALASANA>@<MONGO CLUSTER>.doqpu.mongodb.net/<TIETOKANTA> --collection saanyts --type=csv --headerline --file=saahavainnot.csv
