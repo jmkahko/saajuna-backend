@@ -1,7 +1,7 @@
 // Mongoose-skema, josta tehdään model joka exportataan
 const mongoose = require('mongoose');
 
-// Nykyisen säätilan skeeman luonti. Skeema määrittää kannassa olevan tiedon muodon
+// Nykyisen säätilan skeeman luonti. Skeema määrittää kannassa olevan tiedon muodon.
 const SaanytSchema = new mongoose.Schema({
   time: { type: String }, // Kellonaika
   t2m: { type: Number }, // Lämpötila
@@ -20,7 +20,7 @@ const SaanytSchema = new mongoose.Schema({
   fmisid: { type: Number }, // esim. Kajaani Petäisenniska 126736
 });
 
-// Tehdään skeemasta model, jonka metodeilla kantaoperaatioita suoritetaan. Model on luokka joka sisältää skeeman
-const Saanyt = mongoose.model('Saanyt', SaanytSchema); // Eka laitetaan modelin luokka ja mistä tulee
+// Tehdään skeemasta model, jonka metodeilla kantaoperaatioita suoritetaan. Model on luokka joka sisältää skeeman.
+const Saanyt = mongoose.model('Saanyt', SaanytSchema); // Eka laitetaan modelin luokka ja mistä se tulee
 
 module.exports = Saanyt;

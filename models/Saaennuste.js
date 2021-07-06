@@ -33,6 +33,6 @@ const SaaennusteSchema = new mongoose.Schema({
 });
 
 // Tehdään skeemasta model, jonka metodeilla kantaoperaatioita suoritetaan. Model on luokka joka sisältää skeeman
-const Saaennuste = mongoose.model('Saaennuste', SaaennusteSchema); // Eka laitetaan modelin luokka ja mistä tulee
+const Saaennuste = mongoose.model('Saaennuste', SaaennusteSchema); // Eka laitetaan modelin luokka ja mistä se tulee
 
 module.exports = Saaennuste;

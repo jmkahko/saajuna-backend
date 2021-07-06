@@ -1,7 +1,7 @@
-// Mongoose-skema, josta tehdään model joka exportataan
+// Mongoose-skema, josta tehdään model joka exportataan.
 const mongoose = require('mongoose');
 
-// Skeeman luonti. Skeema määrittää kannassa olevan tiedon muodon
+// Skeeman luonti. Skeema määrittää kannassa olevan tiedon muodon.
 const AsemaSchema = new mongoose.Schema({
   passengerTraffic: { type: Boolean }, // false, true
   type: { type: String, min: 5, max: 25 }, // "STATION", "STOPPING_POINT", "TURNOUT_IN_THE_OPEN_LINE"
@@ -13,7 +13,7 @@ const AsemaSchema = new mongoose.Schema({
   latitude: { type: String, max: 9 }, // "64.537118"
 });
 
-// Tehdään skeemasta model, jonka metodeilla kantaoperaatioita suoritetaan. Model on luokka joka sisältää skeeman
-const Asema = mongoose.model('Asema', AsemaSchema); // Eka laitetaan modelin luokka ja mistä tulee
+// Tehdään skeemasta model, jonka metodeilla kantaoperaatioita suoritetaan. Model on luokka, joka sisältää skeeman.
+const Asema = mongoose.model('Asema', AsemaSchema); // Eka laitetaan modelin luokka ja mistä se tulee.
 
 module.exports = Asema;
