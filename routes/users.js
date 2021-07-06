@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const UserController = require('../controllers/usercontroller');
-const authorize = require('../verifytoken'); // authorisoinnin vahvistu
+const authorize = require('../verifytoken'); // authorisoinnin vahvistus
 
 // Hae kaikki käyttäjät
 router.get('/', authorize, UserController.allUser);

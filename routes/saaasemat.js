@@ -5,7 +5,7 @@ const havaintoasemacontroller = require('../controllers/havaintoasemacontroller'
 // Haetaan kaikki säähavaintoasemat
 router.get('/', havaintoasemacontroller.haeKaikki);
 
-// Haetaan tietty säähavaintoasema id:llä
+// Haetaan tietty säähavaintoasema sen id:llä
 router.get('/:id', havaintoasemacontroller.haeAsemaIDlla);
 
 // Haetaan tietyn säähavaintoaseman säätiedot 10 minuuttia
