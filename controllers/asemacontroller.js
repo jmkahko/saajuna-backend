@@ -121,7 +121,7 @@ const AsemaController = {
 
       const url =
         'https://rata.digitraffic.fi/api/v1/live-trains/station/' +
-        station +
+        encodeURIComponent(station) + // encodeURIComponent:in avulla saadaan ääkkösen toimimaan. Muuten palautus on status 400
         '?arrived_trains=' +
         arrived_trains +
         '&arriving_trains=' +
@@ -137,11 +137,14 @@ const AsemaController = {
         url: url, // Laitetaan url tieto.
         headers: {
           'accept-encoding': 'gzip', // Kerrotaan headerissa, että hyväksytään gzip encode.
+          'Content-Type': 'application/json;charset=UTF-8'
         },
         JSON: true, // JSON hyväksytään.
         method: 'GET', // Metodi on GET eli haku.
         gzip: true, // gzip hyväksytään. Ilman tätä riviä tieto on siansaksaa.
       };
+
+      console.log(options)
 
       request(options, function (error, response) {
         // Jos tulee palautuksena arvo 200, niin tulostetaan saatu tulos.
