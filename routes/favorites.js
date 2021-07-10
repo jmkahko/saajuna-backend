@@ -3,7 +3,7 @@ const router = express.Router();
 const FavoritesController = require('../controllers/favoritescontroller');
 const authorize = require('../verifytoken'); // authorisoinnin vahvistu
 
-// Haetaan kaikki suosikit
+// Kaikkien suosikkien haku
 router.get('/', authorize, FavoritesController.haeKaikki);
 
 // Haetaan käyttäjän tallentamat suosikit
