@@ -4,7 +4,7 @@ const AsemaController = require('../controllers/asemacontroller');
 
 const authorize = require('../verifytoken'); // authorisoinnin vahvistu
 
-// Haetaan kaikki asemat
+// Kaikkien asemien haku
 router.get('/', AsemaController.haeKaikki);
 
 // Lisätään asemat. Tämä tehdään GET pyynnöllä, koska dataa ei lähetetä vaan haetaan eri paikasta
