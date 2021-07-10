@@ -48,7 +48,6 @@ const JunaController = {
 
   // Haetaan kaikkien junien sijaintitiedot
   haeKaikkiJunatSijainti: (req, res) => {
-
     // Tarvittava url tieto
     const url = 'https://rata.digitraffic.fi/api/v1/train-locations/latest/';
 
@@ -69,9 +68,8 @@ const JunaController = {
         // Parseroidaan tulos data muuttujaan
         let data = JSON.parse(response.body);
 
-         // Palautetaan JSONina junan viimeisin paikkatieto
+        // Palautetaan JSONina junan viimeisin paikkatieto
         res.json(data);
-        
       } else {
         // Jos tulee muu kuin 200 vastaus viestissä, niin tulostetaan koodi ja virhe viesti
         console.log('Statuskoodi: ' + response.statusCode);
@@ -144,7 +142,7 @@ const JunaController = {
                 ]);
               }
 
-              // Junan viimeisen aseman koko nimi
+              // Junan viimeisen asema ja sen koko nimi
               if (
                 data[0]['timeTableRows'][timeTableRiveja][
                   'stationShortCode'
