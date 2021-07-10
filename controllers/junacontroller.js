@@ -46,6 +46,41 @@ const JunaController = {
     });
   },
 
+  // Haetaan kaikkien junien sijaintitiedot
+  haeKaikkiJunatSijainti: (req, res) => {
+
+    // Tarvittava url tieto
+    const url = 'https://rata.digitraffic.fi/api/v1/train-locations/latest/';
+
+    // Asetetaan haulle optioita; url sivu mistä haetaan, headers kerrotaan Accect-Encoding tieto, kun ilman sitä dataa ei saada.
+    const options = {
+      url: url, // Laitetaan url tieto
+      headers: {
+        'accept-encoding': 'gzip', // Kerrotaan headerissa, että hyväksytään gzip encode
+      },
+      JSON: true, // JSON hyväksytään
+      method: 'GET', // Metodi on GET eli haku
+      gzip: true, // gzip hyväksytään. Ilman tätä riviä, tieto on siansaksaa.
+    };
+
+    request(options, function (error, response) {
+      // Jos tulee palautuksena arvo 200, niin tulostetaan saatu tulos.
+      if (response.statusCode === 200) {
+        // Parseroidaan tulos data muuttujaan
+        let data = JSON.parse(response.body);
+
+         // Palautetaan JSONina junan viimeisin paikkatieto
+        res.json(data);
+        
+      } else {
+        // Jos tulee muu kuin 200 vastaus viestissä, niin tulostetaan koodi ja virhe viesti
+        console.log('Statuskoodi: ' + response.statusCode);
+        console.log('Virhe: ' + error);
+        res.status(response.statusCode).send([]); // Lähetetään statuskoodi ja tyhjä taulukko
+      }
+    });
+  },
+
   // Haetaan junan aikataulu esim. https://rata.digitraffic.fi/api/v1/trains/2021-04-27/67
   haeAikataulu: (req, res) => {
     Asema.find((error, asemat) => {
