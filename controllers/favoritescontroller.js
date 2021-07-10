@@ -13,7 +13,7 @@ const FavoritesController = {
     });
   },
 
-  // Hae käyttäjän tallentamat suosikit.
+  // Haetaan käyttäjän tallentamat suosikit.
   haeKayttajanSuosikit: (req, res) => {
     Favorites.findOne({ username: req.params.username }, (error, suosikki) => {
       // Jos tulee virhe, niin lähetetään virhesanoma.
@@ -60,7 +60,7 @@ const FavoritesController = {
     );
   },
 
-  // Poistetaan halutun tunnuksen tiedot
+  // Poistetaan halutun tunnuksen tiedot.
   poistaTunnus: (req, res) => {
     // deleteOne argumentit: {hakukriteeri (req.params.id saa request sanomassa tiedon)} eli _id:tä
     // vastaava id saadaan clientilta, (callback jolla suoritetaan varsinainen haku)
