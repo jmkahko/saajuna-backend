@@ -7,7 +7,7 @@ const parser = new xml2js.Parser(); // XML-parserointiin säätiedosta
 
 // Havaintoaseman modelin tuonti
 const HavaintoAsemaController = {
-  // Haetaan kaikki säähavaintoasemat
+  // Haetaan kaikki säähavaintoasemat.
   haeKaikki: (req, res) => {
     Havaintoasema.find((error, havaintoasemat) => {
       if (error) {
@@ -45,11 +45,11 @@ const HavaintoAsemaController = {
     });
   },
 
-  // Haetaan havaintoaseman säätieto. Säätieto päivittyy 10 minuutin välein.
+  // Haetaan havaintoaseman säätieto. Säätieto päivittyy 10 minuutin välein Ilmatieteen laitoksen tietokannasta.
   haeHavaintoasemanSaa: (req, response) => {
     const fmisid = req.params.fmisid; // Saadaan päivätieto
 
-    // Haetaan viimeisestä tallennuksesta kellonaika, milloin havainto on tehty.
+    // Haetaan viimeisestä tallennuksesta kellonaika, milloin viimeisin havainto on tehty.
     Saanyt.findOne(
       { fmisid: req.params.fmisid }, //Haetaan havaintoaseman fmisid-tunnuksella
       { _id: false, time: true },
@@ -62,7 +62,7 @@ const HavaintoAsemaController = {
 
         // Haetaan päivämäärä ja kellonaika
         let aika1 = new Date();
-        aika1.setSeconds(0, 0); // Määritellään ajasta sekunnit ja millisekunnit nolliksi
+        aika1.setSeconds(0, 0); // Määritellään ajasta sekunnit ja millisekunnit nolliksi, koska niitä ei tarvita haussa.
 
         // Ajan muunnoksia (vuosi, kuukausi, päivä, tunti ja minuutti). Sekunnit ja millisekunnit jätetään pois, koska niitä ei tarvita haussa.
         // FMI käyttää päivämäärä-tiedossaan UTC-aikaa, joten esimerkiksi tunneista pitää vähentää 3 h, jotta saadaan
@@ -248,7 +248,7 @@ const HavaintoAsemaController = {
     const latlon = req.params.latlon; // Saadaan pituus- ja leveysasteen koordinaatit.
 
     let aika1 = new Date();
-    aika1.setSeconds(0, 0); // Määritellään ajasta sekunnit ja millisekunnit nolliksi.
+    aika1.setSeconds(0, 0); // Määritellään ajasta sekunnit ja millisekunnit nolliksi, koska niitä ei tarvita haussa.
 
     // Ajan muunnoksia (vuosi, kuukausi, päivä, tunti ja minuutti). Sekunnit ja millisekunnit jätetään pois, koska niitä ei tarvita hakua varten.
     // FMI käyttää päivämäärä-tiedossaan UTC-aikaa, joten esimerkiksi tunneista pitää vähentää 3 h, jotta saadaan
