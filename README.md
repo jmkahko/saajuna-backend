@@ -107,8 +107,8 @@ Backendiin käytetty yhteensä aikaa n. 70 h.
 ## Työssä hyödynnetyt tutoriaalit
 
 - [Tour of Heroes](https://angular.io/tutorial). Tutoriaalia on käytetty siihen, kuinka tehdään tarvittavat reitit ja miten Observablesta haetaan dataa.
-- Ajan, XML ja JSON:in parserointiin käytetty paljon StackOverFlow:sta löytyviä vinkkejä ja ohjeita.
-- Käytetty myös Rautieliikenteen ja Ilmatieteen laitoksen omia ohjeita ja heidän Github-sivustoja esimerkiksi tiedon määrityksiä varten.
+- Ajan, XML:n ja JSON:in parserointiin on käytetty paljon StackOverFlow:sta löytyviä vinkkejä ja ohjeita.
+- On käytetty myös Rautieliikenteen ja Ilmatieteen laitoksen omia ohjeita ja heidän Github-sivustoja esimerkiksi tiedon määrityksiä varten.
 - Lisäksi on käytetty paljon JAMK:n Web-kehittäjä koulutuksen materiaaleja joista eniten hyödynnettiin Node.js- ja Frontend-kurssien materiaaleja.
   Materiaaleja on käytetty esimerkiksi siihen kuinka kirjautuminen tehdään, luodaan tokenit, verifoidaan tokenit ja miten reittejä käytetään.
 - Backendissä ei ole käytetty suoraan muita tutoriaaleja vaan pieniä palasia otettua sieltä sun täältä eri nettisivustoilta eri ongelmien ratkaisemiseksi.

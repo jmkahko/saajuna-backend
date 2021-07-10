@@ -3,7 +3,7 @@ const router = express.Router();
 const UserController = require('../controllers/usercontroller');
 const authorize = require('../verifytoken'); // authorisoinnin vahvistus
 
-// Hae kaikki käyttäjät
+// Kaikkien käyttäjien haku
 router.get('/', authorize, UserController.allUser);
 
 // Uuden käyttäjän rekisteröinti

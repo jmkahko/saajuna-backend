@@ -18,7 +18,7 @@ const AsemaController = {
   // Haetaan asema id:llä
   haeIdlla: (req, res) => {
     Asema.findOne({ _id: req.params.id }, (error, asemat) => {
-      // Jos tulee virhe, niin lähetetään virhesanoma JSONina. Muuten backend kaatuu.
+      // Jos tulee virhe, niin lähetetään virhesanoma JSONina, koska muuten backend kaatuu.
       if (error) {
         console.log(error); // Lähetetään virhe myös konsoliin.
         res.json(error); // Palautetaan virhe JSON muodossa.
@@ -44,7 +44,7 @@ const AsemaController = {
 
   // Talletaan kaikki asemat https://rata.digitraffic.fi/api/v1/metadata/stations linkistä.
   lisaaAsemat: (req, res) => {
-    // Haetaan rautatie asemat
+    // Haetaan rautatieasemat
     const url = 'https://rata.digitraffic.fi/api/v1/metadata/stations';
 
     let asemia = 0; // Saadaan JSON sanomaan arvo montako asemaa lisättiin.
@@ -81,7 +81,7 @@ const AsemaController = {
         }
         console.log('Lisätty ' + data.length + ' asemaa');
       } else {
-        // Jos tulee muu kuin 200 vastaus viestissä, niin tulostetaan koodi ja virhe ilmoitus.
+        // Jos tulee muu kuin 200 vastaus viestissä, niin tulostetaan koodi ja virheilmoitus.
         console.log('Statuskoodi: ' + response.statusCode);
         console.log('Virhe: ' + error);
       }
@@ -121,7 +121,7 @@ const AsemaController = {
 
       const url =
         'https://rata.digitraffic.fi/api/v1/live-trains/station/' +
-        encodeURIComponent(station) + // encodeURIComponent:in avulla saadaan ääkkösen toimimaan. Muuten palautus on status 400
+        encodeURIComponent(station) + // encodeURIComponent:in avulla saadaan ääkköset toimimaan. Muuten palautus on status 400.
         '?arrived_trains=' +
         arrived_trains +
         '&arriving_trains=' +
@@ -132,19 +132,19 @@ const AsemaController = {
         departing_trains +
         '&include_nonstopping=false';
 
-      // Asetetaan haulle optioita; url sivu mistä haetaan, headers kerrotaan Accect-Encoding tieto, kun ilman sitä dataa ei saada.
+      // Asetetaan haulle optioita; url sivu mistä haetaan, headers kerrotaan Accect-Encoding tieto, koska ilman sitä dataa ei saada.
       const options = {
         url: url, // Laitetaan url tieto.
         headers: {
           'accept-encoding': 'gzip', // Kerrotaan headerissa, että hyväksytään gzip encode.
-          'Content-Type': 'application/json;charset=UTF-8'
+          'Content-Type': 'application/json;charset=UTF-8',
         },
         JSON: true, // JSON hyväksytään.
         method: 'GET', // Metodi on GET eli haku.
         gzip: true, // gzip hyväksytään. Ilman tätä riviä tieto on siansaksaa.
       };
 
-      console.log(options)
+      console.log(options);
 
       request(options, function (error, response) {
         // Jos tulee palautuksena arvo 200, niin tulostetaan saatu tulos.
@@ -159,7 +159,7 @@ const AsemaController = {
           for (let i = 0; i < data.length; i++) {
             junientiedot.push(['trainNumber', data[i]['trainNumber']]); // Junan numero
             junientiedot.push(['trainType', data[i]['trainType']]); // Junatyyppi IC, Pendolino ym.
-            junientiedot.push(['trainCategory', data[i]['trainCategory']]); // junan kategoria
+            junientiedot.push(['trainCategory', data[i]['trainCategory']]); // Junan kategoria
 
             // Asema, jolta juna on lähtenyt.
             junientiedot.push([
@@ -172,7 +172,7 @@ const AsemaController = {
 
             // Käydään läpi tiedot, että saadaan asema-taulusta aseman koko nimi
             for (let z = 0; z < asemat.length; z++) {
-              // Rautatieasema, jolta juna on lähtenyt koko nimi
+              // Rautatieasema, jolta juna on lähtenyt ja sen koko nimi
               if (
                 data[i]['timeTableRows'][0]['stationShortCode'] ===
                 asemat[z].stationShortCode
@@ -183,7 +183,7 @@ const AsemaController = {
                 ]);
               }
 
-              // Junan viimeinen rautatieasema koko nimi
+              // Junan viimeinen rautatieasema ja sen koko nimi
               if (
                 data[i]['timeTableRows'][timeTableRiveja][
                   'stationShortCode'
@@ -205,11 +205,11 @@ const AsemaController = {
             // Halutun rautatieaseman lyhytkoodi
             junientiedot.push(['stationStop', station]);
 
-            // Käsitellään jokainen juna erikseen for silmukassa.
+            // Käsitellään jokainen juna erikseen for-silmukassa.
             for (let x = 0; x < data[i]['timeTableRows'].length; x++) {
               // Haluttu rautatieasema
               if (data[i]['timeTableRows'][x]['stationShortCode'] === station) {
-                // Saapuvan junan aikataulu UTC aika
+                // Saapuvan junan aikataulu UTC-ajassa
                 if (data[i]['timeTableRows'][x]['type'] === 'ARRIVAL') {
                   junientiedot.push([
                     'arrivalScheduledTime',
@@ -229,7 +229,7 @@ const AsemaController = {
                   ]);
                 }
 
-                // Lähtevän junan aikataulu UTC aika
+                // Lähtevän junan aikataulu UTC-ajassa.
                 if (data[i]['timeTableRows'][x]['type'] === 'DEPARTURE') {
                   junientiedot.push([
                     'departureScheduledTime',
@@ -265,7 +265,7 @@ const AsemaController = {
           // Lähetetään JSON sanomana taulukko eteenpäin.
           res.json(asemantiedot);
         } else {
-          // Jos tulee muu kuin 200 vastaus viestissä, niin tulostetaan koodi ja virhe viesti.
+          // Jos tulee muu kuin 200 vastausviestissä, niin tulostetaan koodi ja virheviesti.
           console.log('Statuskoodi: ' + response.statusCode);
           console.log('Virhe: ' + error);
           res.status(response.statusCode).send([]); // Lähetetään statuskoodi ja tyhjä taulukko.
