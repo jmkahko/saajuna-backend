@@ -6,7 +6,7 @@ Työn ovat tehneet yhdessä Janne ja Leena Kähkönen. Molemmat ovat osallistune
 
 ## Yleisesittely
 
-[Sääjuna-backend](https://saajuna.herokuapp.com/) tarjoaa sivuston kautta backend-palveluita [Sääjuna-frontend](https://saajuna.herokuapp.com/) sivustolle.
+[Sääjuna-backend](https://saajuna-backend.herokuapp.com/) tarjoaa sivuston kautta backend-palveluita [Sääjuna-frontend](https://saajuna.herokuapp.com/) sivustolle.
 Tarjottavia backend-palveluita ovat mm. käyttäjien ja tietojen (esim. tämänhetkinen sää) tallennukseen käytetyt tietokannat ja tietojen haun rajapinnat sekä Ilmatieteen laitokselle että VR:lle.
 
 ### Sovelluksen idea ja sen toiminnallisuus lyhyesti.
