@@ -8,7 +8,7 @@ const UserController = {
   allUser: (req, res) => {
     User.find((error, kayttajat) => {
       if (error) {
-        throw error;
+        return res.status(500).send('Kaikkien käyttäjien haku epäonnistui'); // Lähetetään status 500 ja virhe teksti
       }
 
       res.json(kayttajat);
@@ -28,13 +28,14 @@ const UserController = {
       },
       (err, user) => {
         if (err) {
+          console.log(err); // Tulostetaan saatu virhe
           return res.status(500).send('Käyttäjän rekisteröinti epäonnistui.');
         } else {
           const token = createToken(user); // Tokenin luontimetodi
           // Palautetaan token JSON-muodossa.
           res.json({
             success: true,
-            message: 'Tässä on valmis Token!',
+            message: 'Token luotu!',
             token: token,
           });
         }
@@ -51,7 +52,8 @@ const UserController = {
       },
       function (err, user) {
         if (err) {
-          throw err;
+          console.log(err); // Tulostetaan virhe ilmoitus
+          return res.status(500).send('Kirjautuminen epäonnistui'); // Lähetetään status 500 ja virhe teksti
         }
 
         if (!user) {
@@ -74,7 +76,7 @@ const UserController = {
             // Palautetaan token JSON-muodossa.
             res.json({
               success: true,
-              message: 'Tässä on valmis Token!',
+              message: 'Token luotu!',
               token: token,
             });
           }
@@ -94,7 +96,8 @@ const UserController = {
       { $set: { password: hashedPassword } },
       (error, result) => {
         if (error) {
-          throw error;
+          console.log(error) // Tulostetaan virhe
+          return res.status(500).send('Salasanan vaihto epäonnistui'); // Lähetetään status 500 ja virhe teksti
         }
         res.json('Salasana on päivitetty');
       }
@@ -108,7 +111,8 @@ const UserController = {
     User.deleteOne({ _id: req.params.id }, (error, result) => {
       // Jos tulee virhe, niin lähetetään virhesanoma.
       if (error) {
-        throw error;
+        console.log(error) // Tulostetaan virhe
+        return res.status(500).send('Käyttäjätunnuksen poisto epäonnistui'); // Lähetetään status 500 ja virhe teksti
       }
       res.json('Käyttäjä on poistettu');
     });

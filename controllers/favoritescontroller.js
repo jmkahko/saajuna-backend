@@ -6,7 +6,8 @@ const FavoritesController = {
   haeKaikki: (req, res) => {
     Favorites.find((error, suosikit) => {
       if (error) {
-        throw error;
+        console.log(error); //tulostetaan saatu virhe
+        return res.status(500).send('Kaikkien käyttäjien haku epäonnistui'); // Lähetetään status 500 ja virhe teksti
       }
 
       res.json(suosikit);
@@ -18,7 +19,8 @@ const FavoritesController = {
     Favorites.findOne({ username: req.params.username }, (error, suosikki) => {
       // Jos tulee virhe, niin lähetetään virhesanoma.
       if (error) {
-        throw error;
+        console.log(error); //tulostetaan saatu virhe
+        return res.status(500).send('Käyttäjän suosikkien haku epäonnistui'); // Lähetetään status 500 ja virhe teksti
       }
       res.json(suosikki); // Lähetetään JSONina tietokannasta saatu tieto eteenpäin.
     });
@@ -30,7 +32,8 @@ const FavoritesController = {
     Favorites.findByIdAndUpdate(req.params.id, req.body, (error, result) => {
       // Jos tulee virhe, niin lähetetään virhesanoma.
       if (error) {
-        throw error;
+        console.log(error); //tulostetaan saatu virhe
+        return res.status(500).send('Suosikkien muuttaminen epäonnistui'); // Lähetetään status 500 ja virhe teksti
       }
       res.json(result);
     });
@@ -49,7 +52,8 @@ const FavoritesController = {
       // Virheen käsittelyä
       (err) => {
         if (err) {
-          return res.status(500).send('Suosikkien lisäykset epäonnistuivat');
+          console.log(err) // Tulostetaan saatu virhe
+          return res.status(500).send('Suosikkien lisäykset epäonnistuivat'); // Lähetetään status 500 ja virhe teksti
         } else {
           // Palautetaan token JSON-muodossa.
           res.json({
@@ -67,7 +71,8 @@ const FavoritesController = {
     Favorites.deleteOne({ _id: req.params.id }, (error, result) => {
       // Jos tulee virhe,niin lähetetään virhesanoma.
       if (error) {
-        throw error;
+        console.log(error); //tulostetaan saatu virhe
+        return res.status(500).send('Tunnuksen poisto epäonnistui'); // Lähetetään status 500 ja virhe teksti
       }
       res.json('Käyttäjä on poistettu');
     });
